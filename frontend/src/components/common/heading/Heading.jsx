@@ -9,6 +9,7 @@ const Heading = ({ subtitle, title }) => {
       </div>
     </>
   )
+  
 }
 
 export default Heading

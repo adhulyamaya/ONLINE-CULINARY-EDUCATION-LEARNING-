@@ -10,3 +10,4 @@ urlpatterns = [
     path('mentor-approval/', MentorApprovalView.as_view(), name='mentor-approval'),
     ]
 
+

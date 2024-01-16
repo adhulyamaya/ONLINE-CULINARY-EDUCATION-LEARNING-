@@ -18,6 +18,7 @@ const EditClass=()=> {
         price:"",
         syllabus:"",
         
+        
     });
     
     const classnameEditHandle=(e)=>{
