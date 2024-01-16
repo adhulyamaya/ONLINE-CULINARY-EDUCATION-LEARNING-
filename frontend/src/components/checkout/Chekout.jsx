@@ -109,12 +109,15 @@
 import { CLIENT_ID } from '../../config/Config'
 import React, { useState, useEffect } from "react" ;
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     const [show, setShow] = useState(false);
     const [success, setSuccess] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState("");
     const [orderID, setOrderID] = useState(false);
+
+    const navigate=useNavigate()
 
     // creates a paypal order
     const createOrder = (data, actions) => {
@@ -151,6 +154,8 @@ const Checkout = () => {
         if (success) {
             alert("Payment successful!!");
             console.log('Order successful . Your order id is--', orderID);
+            navigate('../ordersuceess')
+
         }
     },[success]);
 

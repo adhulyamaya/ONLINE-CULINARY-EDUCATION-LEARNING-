@@ -18,6 +18,7 @@ import EditClass from "./components/mentor/EditClass"
 import DeleteClass from "./components/mentor/DeleteClass";
 import CourseManage from "./components/admin/CourseManage";
 import Chekout from "./components/checkout/Chekout";
+import Ordersucess from "./components/order/Ordersucess";
 
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
@@ -69,6 +70,7 @@ function App() {
             <Route  path="/journal" element={<Blog />} />
             <Route  path="/contact" element={<Contact />} />
             <Route  path="/checkout" element={<Chekout/>} />
+            <Route path="/ordersuceess" element={<Ordersucess/>}/>
 
 
             {/* admin routes */}
