@@ -88,7 +88,7 @@ class CourseListing(APIView):
      courseobj=Class.objects.all() 
      if courseobj:
         serializer=ClassSerializer(courseobj,many=True)
-        return Response({"message":"passed",'classdata':serializer.data})
+        return Response({"message":"passedddddddddddddddddddddddddddd",'classdata':serializer.data})
 
 
 

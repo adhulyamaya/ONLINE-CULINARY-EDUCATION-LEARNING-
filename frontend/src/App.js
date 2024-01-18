@@ -69,7 +69,10 @@ function App() {
             <Route  path="/pricing" element={<Pricing />} />
             <Route  path="/journal" element={<Blog />} />
             <Route  path="/contact" element={<Contact />} />
-            <Route  path="/checkout" element={<Chekout/>} />
+            {/* <Route  path="/checkout" element={<Chekout/>} /> */}
+            <Route path="/checkout/:courseId" element={<Chekout />} />
+
+
             <Route path="/ordersuceess" element={<Ordersucess/>}/>
 
 
