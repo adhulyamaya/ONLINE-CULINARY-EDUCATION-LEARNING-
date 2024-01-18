@@ -19,6 +19,8 @@ import DeleteClass from "./components/mentor/DeleteClass";
 import CourseManage from "./components/admin/CourseManage";
 import Chekout from "./components/checkout/Chekout";
 import Ordersucess from "./components/order/Ordersucess";
+import VideoPlayer from "./components/videoclass/VideoPlayer";
+import { VideoRoom } from "./components/videoclass/VideoRoom";
 
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
@@ -69,11 +71,11 @@ function App() {
             <Route  path="/pricing" element={<Pricing />} />
             <Route  path="/journal" element={<Blog />} />
             <Route  path="/contact" element={<Contact />} />
-            {/* <Route  path="/checkout" element={<Chekout/>} /> */}
             <Route path="/checkout/:courseId" element={<Chekout />} />
-
-
             <Route path="/ordersuceess" element={<Ordersucess/>}/>
+            <Route path="/videoplayer" element={<VideoPlayer/>}/>
+            <Route path="/videoroom" element={<VideoRoom/>}/>
+
 
 
             {/* admin routes */}

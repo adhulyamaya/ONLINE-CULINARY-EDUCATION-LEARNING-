@@ -17,11 +17,13 @@ function AdminHome(){
     const mentorsSubmit=()=>{
         navigate('../mentorsmanage')
         console.log(navigate)
-
-        
-        
-
     }
+
+    const courselistSubmit=()=>{
+        navigate('../coursemanage')
+        console.log(navigate)
+    }
+ 
     return(
         <>
         <button onClick={logoutSubmit}>Logout </button>
@@ -29,7 +31,10 @@ function AdminHome(){
         <button onClick={usersSubmit}>USERS</button>
         <br />
         <button onClick={mentorsSubmit}>MENTORS</button>
+        <br />
+        <button onClick={courselistSubmit}>courselisted</button>
         </>
+        
     )
 }
 export default AdminHome
