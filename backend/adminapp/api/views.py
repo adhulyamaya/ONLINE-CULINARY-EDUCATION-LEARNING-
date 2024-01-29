@@ -10,21 +10,44 @@ from myapp.api.serializers import *
 from mentorapp.api.serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 
+# class AdminLoginView(APIView):
+#     def post(self, request):
+#         username = request.data.get('username')
+#         password = request.data.get('password')
+        
+
+#         adminobj=AdminProfile.objects.get(username=username,password=password)
+#         if adminobj:
+#             refresh = RefreshToken.for_user(adminobj)
+#             serialized=AdminProfileSerializer(adminobj)
+#             print(serialized.data,"{{{{{{serialized.data}}}}}}")
+
+#             return Response({'message': 'success',"userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
+#         else:
+#             return Response({'message': 'Invalid credentials'})
+
 class AdminLoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
         
-
-        adminobj=AdminProfile.objects.get(username=username,password=password)
-        if adminobj:
-            refresh = RefreshToken.for_user(adminobj)
-            serialized=AdminProfileSerializer(adminobj)
-            print(serialized.data,"{{{{{{serialized.data}}}}}}")
-
-            return Response({'message': 'success',"userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
-        else:
+        try:
+            admin_obj = AdminProfile.objects.get(username=username, password=password)
+            print(admin_obj,"vannoooooo")
+        except AdminProfile.DoesNotExist:
             return Response({'message': 'Invalid credentials'})
+
+        refresh = RefreshToken.for_user(admin_obj)
+        serialized = AdminProfileSerializer(admin_obj)
+        print(serialized.data,"nokkkkkk")
+
+        return Response({
+            'message': 'success',
+            'userdataa': serialized.data,
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        })
+
         
 class AdminprofileView(APIView):
     def get(self,request):
