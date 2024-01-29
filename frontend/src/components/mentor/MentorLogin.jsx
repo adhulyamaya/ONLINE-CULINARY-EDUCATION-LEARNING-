@@ -21,7 +21,7 @@ const Userlogin = () => {
         access: res.data.access,
         refresh: res.data.refresh,
       };
-      Cookies.set("userDetails", JSON.stringify(res.data.userdata));
+      Cookies.set("mentorDetails", JSON.stringify(res.data.mentordata));
       Cookies.set("accessToken", JSON.stringify(res.data.access));
       // localStorage.setItem("userDetails", JSON.stringify(res.data.userdata));
       // localStorage.setItem("accessToken", JSON.stringify(res.data.access));

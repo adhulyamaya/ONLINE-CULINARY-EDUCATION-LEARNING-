@@ -126,9 +126,10 @@ const Userlogin = () => {
           access: res.data.access,
           refresh: res.data.refresh
         };
+        localStorage.removeItem('adminDetails'); 
         Cookies.set("userDetails", JSON.stringify(res.data.userdata));
         Cookies.set("accessToken", JSON.stringify(res.data.access));
-        localStorage.removeItem('adminDetails'); 
+        // localStorage.removeItem('adminDetails'); 
         if (res.data.message === "success")
           navigate('../');
       })
@@ -171,6 +172,7 @@ const Userlogin = () => {
                     access: res.data.access,
                     refresh: res.data.refresh,
                   };
+                  
                   localStorage.setItem('userDetails', JSON.stringify(res.data.userdata));
                   localStorage.setItem('accessToken', JSON.stringify(res.data.access));
                   if (res.data.message === 'success') {

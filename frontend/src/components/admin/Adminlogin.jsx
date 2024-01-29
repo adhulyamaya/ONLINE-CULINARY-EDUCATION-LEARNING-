@@ -1,177 +1,19 @@
-// import React from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// // import { useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-
-// import {changeAdminname,changeAdminPassword}from "../../feautures/adminSlice"
-// import axiosInstance from '../../axios/adminaxios'
-// // import "./login.css"
-// // import logo from '../../assets/sk logo.png';
-
-// const Adminlogin = () => {
-//     const dispatch =useDispatch()
-//     const adminlogin=useSelector((state)=>state.adminlogin)
-//     const navigate =useNavigate()
-//     const [error, setError] = React.useState(null)
-//     const loginSubmit = () => {
-      
-//       const datas = {
-//           username: adminlogin.value.username,
-//           password: adminlogin.value.password,
-//       };
-//       console.log(datas,"nadakuvo valom")
-//       axiosInstance.post('adminlogin/', datas)
-//           .then((res) => {
-//               console.log(res.data, "whyyyyyyyyyyyyyyyyyyyyyyyy");
-//               const tokens = {
-//                   access: res.data.access,
-//                   refresh: res.data.refresh,
-//               };
-//               localStorage.setItem("adminDetails", JSON.stringify(res.data.userdataa));
-//               localStorage.setItem("accessToken", JSON.stringify(res.data.access));
-//               if (res.data.message === "success") {
-//                   navigate('/adminhome');
-//               }
-//           })
-//           .catch((error) => {
-//               console.error(error);
-//               setError('Invalid credentials. Please check your username and password.');
-//           });
-//   };
-  
-  
-//     return (
-//         <div className="wrapper">
-//           <div className="logo">
-//             <img src="" alt="SK COOKS" />
-//           </div>
-//           <div className="text-center mt-4 name">
-//             Sk Cooks
-//           </div>
-//           <form className="p-3 mt-3">
-//             <div className="form-field d-flex align-items-center">
-//               <span className="far fa-user"></span>
-//               <input
-//                 type="text"
-//                 name="userName"
-//                 id="userName"
-//                 placeholder="Username"
-//                 onChange={(e) => dispatch(changeAdminname(e.target.value))}
-//               />
-//             </div>
-//             <div className="form-field d-flex align-items-center">
-//               <span className="fas fa-key"></span>
-//               <input
-//                 type="password"
-//                 name="password"
-//                 id="pwd"
-//                 placeholder="Password"
-//                 onChange={(e) => dispatch(changeAdminPassword(e.target.value))}
-//               />
-//             </div>
-//             <button className="btn mt-3" onClick={loginSubmit}>
-//               Login
-//             </button>
-//           </form>
-          
-//         </div>
-//       );
-// }
-
-// export default Adminlogin
-
-
-
-// import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
-// import { changeAdminname, changeAdminPassword } from '../../feautures/adminSlice';
-// import axiosInstance from '../../axios/adminaxios';
-
-// const Adminlogin = () => {
-//   const dispatch = useDispatch();
-//   const adminlogin = useSelector((state) => state.adminlogin);
-//   const navigate = useNavigate();
-//   const [error, setError] = React.useState(null);
-
-//   const loginSubmit = (e) => {
-//     e.preventDefault(); // Prevent default form submission behavior
-//     localStorage.removeItem('userDetails');
-//     localStorage.removeItem('accessToken');
-
-//     const datas = {
-//       username: adminlogin.value.username,
-//       password: adminlogin.value.password,
-//     };
-
-//     axiosInstance.post('adminlogin/', datas)
-//       .then((res) => {
-//         const tokens = {
-//           access: res.data.access,
-//           refresh: res.data.refresh,
-//         };
-//         localStorage.setItem('adminDetails', JSON.stringify(res.data.userdataa));
-//         localStorage.setItem('accessToken', JSON.stringify(res.data.access));
-//         if (res.data.message === 'success') {
-//           navigate('/adminhome');
-//         }
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//         setError('Invalid credentials. Please check your username and password.');
-//       });
-//   };
-
-//   return (
-//     <div className="wrapper">
-//       <form className="p-3 mt-3" onSubmit={loginSubmit}>
-//         <div className="form-field d-flex align-items-center">
-//           <span className="far fa-user"></span>
-//           <input
-//             type="text"
-//             name="userName"
-//             id="userName"
-//             placeholder="Username"
-//             onChange={(e) => dispatch(changeAdminname(e.target.value))}
-//           />
-//         </div>
-//         <div className="form-field d-flex align-items-center">
-//           <span className="fas fa-key"></span>
-//           <input
-//             type="password"
-//             name="password"
-//             id="pwd"
-//             placeholder="Password"
-//             onChange={(e) => dispatch(changeAdminPassword(e.target.value))}
-//           />
-//         </div>
-//         <button className="btn mt-3" type="submit">
-//           Login
-//         </button>
-//       </form>
-//     </div> 
-//   );
-// };
-
-// export default Adminlogin;
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { changeAdminname, changeAdminPassword } from '../../feautures/adminSlice';
 import axiosInstance from '../../axios/adminaxios';
 
 const Adminlogin = () => {
-  const dispatch = useDispatch();
-  const adminlogin = useSelector((state) => state.adminlogin);
   const navigate = useNavigate();
-  const [error, setError] = React.useState(null);
+  const [adminUsername, setAdminUsername] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const loginSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     const datas = {
-      username: adminlogin.value.username,
-      password: adminlogin.value.password,
+      username: adminUsername,
+      password: adminPassword,
     };
 
     axiosInstance.post('adminlogin/', datas)
@@ -180,9 +22,9 @@ const Adminlogin = () => {
           access: res.data.access,
           refresh: res.data.refresh,
         };
+        localStorage.removeItem('userDetails');
         localStorage.setItem('adminDetails', JSON.stringify(res.data.userdataa));
         localStorage.setItem('accessToken', JSON.stringify(res.data.access));
-        localStorage.removeItem('userDetails'); // Clear user authentication data
         if (res.data.message === 'success') {
           navigate('/admin-home');
         }
@@ -195,16 +37,16 @@ const Adminlogin = () => {
 
   return (
     <div className="wrapper">
-      
-        <form className="p-3 mt-3" onSubmit={loginSubmit}>
-           <div className="form-field d-flex align-items-center">
-           <span className="far fa-user"></span>
+      <form className="p-3 mt-3" onSubmit={loginSubmit}>
+        <div className="form-field d-flex align-items-center">
+          <span className="far fa-user"></span>
           <input
             type="text"
             name="userName"
             id="userName"
             placeholder="Username"
-            onChange={(e) => dispatch(changeAdminname(e.target.value))}
+            value={adminUsername}
+            onChange={(e) => setAdminUsername(e.target.value)}
           />
         </div>
         <div className="form-field d-flex align-items-center">
@@ -214,16 +56,26 @@ const Adminlogin = () => {
             name="password"
             id="pwd"
             placeholder="Password"
-            onChange={(e) => dispatch(changeAdminPassword(e.target.value))}
+            value={adminPassword}
+            onChange={(e) => setAdminPassword(e.target.value)}
           />
         </div>
         <button className="btn mt-3" type="submit">
           Login
         </button>
-//       
       </form>
     </div>
   );
 };
 
 export default Adminlogin;
+
+
+
+
+
+
+
+
+
+

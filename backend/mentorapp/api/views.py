@@ -33,7 +33,7 @@ class MentorLoginView(APIView):
                 serialized = MentorProfileSerializer(userobj)
 
                 print(serialized.data,"mentorrrrrrrrserialized.data")
-                return Response({"message":"success","userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
+                return Response({"message":"success","mentordata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
             else:
                 return Response({"message": "Mentor not yet accepted by admin"})
         else:
