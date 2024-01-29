@@ -51,7 +51,7 @@ console.log(userdata,"jiiii");
   return (
     <div className='container'>
       <h1>USERS</h1>
-      <Link to="/create" className='btn btn-success my-3'>Create+</Link>
+      {/* <Link to="/create" className='btn btn-success my-3'>Create+</Link> */}
       {/* <input type="text" placeholder='Search'  onChange={(e)=>setSearchData(e.target.value)}/> */}
       {/* <button onClick={handleSearchSubmit}>Search</button> */}
       {/* <table className='table'> */}
@@ -72,10 +72,10 @@ console.log(userdata,"jiiii");
               <td>{item.email}</td>
               <td>{item.image}</td>
               <td>{item.phone}</td>
-              <td>
+              {/* <td>
                 <button onClick={()=>editHandle(item.id)} className='btn btn-sm btn-primary'>EDIT</button>
                 <button onClick={()=>deleteHandle(item.id)} className='btn btn-sm btn-danger ms-2'>DELETE</button>
-              </td>
+              </td> */}
             </tr>
             ))}
             </thead>

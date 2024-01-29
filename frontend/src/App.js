@@ -21,14 +21,15 @@ import Chekout from "./components/checkout/Chekout";
 import Ordersucess from "./components/order/Ordersucess";
 import VideoPlayer from "./components/videoclass/VideoPlayer";
 import { VideoRoom } from "./components/videoclass/VideoRoom";
-
+import Adminlogin from "./components/admin/Adminlogin";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
 const Usersignup = lazy(() => import("./components/Usersignup"));
 const Home = lazy(() => import("./components/home/Home"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
-const Adminlogin = lazy(() => import("./components/admin/Adminlogin"));
+// const Adminlogin = lazy(() => import("./components/admin/Adminlogin"));
 const AdminHome = lazy(() => import("./components/admin/Adminhome"));
 const AdminProfile = lazy(() => import("./components/admin/AdminProfile"));
 const Create = lazy(() => import("./components/admin/Create"));
@@ -64,7 +65,10 @@ function App() {
                 </LoaderWrapper>
               }
             />
-            <Route path="/user-profile" element={<UserProfile />} />
+
+            <Route path="/user-profile" element={<ProtectedRoute path="/user-profile" element={UserProfile} />} />
+            {/* <Route path="/user-profile" element={<ProtectedRoute component={UserProfile} />} /> */}
+            {/* <Route path="/user-profile" element={<UserProfile />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/courses" element={<CourseHome />} />
             <Route  path="/team" element={<Team />} />
@@ -73,14 +77,19 @@ function App() {
             <Route  path="/contact" element={<Contact />} />
             <Route path="/checkout/:courseId" element={<Chekout />} />
             <Route path="/ordersuceess" element={<Ordersucess/>}/>
-            <Route path="/videoplayer" element={<VideoPlayer/>}/>
+            {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
-
+ */}
 
 
             {/* admin routes */}
+            {/* <Route path="/adminlogin" element={<Adminlogin />} /> */}
             <Route path="/adminlogin" element={<Adminlogin />} />
-            <Route path="/adminhome" element={<AdminHome />} />
+            <Route path="/admin-home" element={<AdminHome />} />
+            <Route path="/admin-profile"element={<AdminProfile />}/>
+            <Route path="admin-home/mentors-manage" element={<Mentorsmanage />} />
+            <Route path="admin-home/course-manage" element={<CourseManage />} />
+
             <Route path="/admin-profile" element={<AdminProfile />} />
             <Route path="/create" element={<Create />} />
             <Route path="/edit/:id" element={<EditUser />} />

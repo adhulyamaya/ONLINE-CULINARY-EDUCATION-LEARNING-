@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import RouterOutlet from "../RouterOutlet/RouterOutlet";
 
 
 function AdminHome(){
@@ -10,29 +12,18 @@ function AdminHome(){
         localStorage.removeItem("accessToken")
         navigate('../adminlogin')
     }
-    const usersSubmit=()=>{
-        navigate('../admin-profile')
-
-    }
-    const mentorsSubmit=()=>{
-        navigate('../mentorsmanage')
-        console.log(navigate)
-    }
-
-    const courselistSubmit=()=>{
-        navigate('../coursemanage')
-        console.log(navigate)
-    }
  
     return(
         <>
         <button onClick={logoutSubmit}>Logout </button>
         <br />
-        <button onClick={usersSubmit}>USERS</button>
+        <Link to="/admin-profile">ALL USERS</Link>
         <br />
-        <button onClick={mentorsSubmit}>MENTORS</button>
+        <Link to="/admin-home/mentors-manage">MENTORS</Link>
         <br />
-        <button onClick={courselistSubmit}>courselisted</button>
+        <Link to="/admin-home/course-manage">COURSES</Link>
+        
+        <RouterOutlet/>
         </>
         
     )

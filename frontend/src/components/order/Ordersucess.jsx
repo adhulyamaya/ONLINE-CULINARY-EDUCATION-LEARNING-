@@ -7,8 +7,9 @@ import Back from '../common/back/Back';
 
 
 
-const Ordersucess = () => {
+const Ordersucess = () => { 
   const [joined, setJoined] = useState(false);
+  
   return (
 <div>
   <Back/>
@@ -16,14 +17,15 @@ const Ordersucess = () => {
       <p>payment successfully completed</p>
       <h1>start online class</h1>
 
-      {!joined && (
+      {/* {!joined && (
         <button onClick={() => setJoined(true)}>
           Join Room
         </button>
       )}
 
-      {joined && <VideoRoom />}
+      {joined && <VideoRoom />} */}
     </div>
+    
 
     </div>  )
 }
