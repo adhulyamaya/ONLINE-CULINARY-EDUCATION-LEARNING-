@@ -23,6 +23,8 @@ import VideoPlayer from "./components/videoclass/VideoPlayer";
 import { VideoRoom } from "./components/videoclass/VideoRoom";
 import Adminlogin from "./components/admin/Adminlogin";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import SideBar from "./components/admin/SideBar";
+import Navbar from "./components/admin/Navbar";
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
@@ -83,7 +85,7 @@ function App() {
 
 
             {/* admin routes */}
-            {/* <Route path="/adminlogin" element={<Adminlogin />} /> */}
+            
             <Route path="/adminlogin" element={<Adminlogin />} />
             <Route path="/admin-home" element={<AdminHome />} />
             <Route path="/admin-profile"element={<AdminProfile />}/>
@@ -96,6 +98,10 @@ function App() {
             <Route path="/delete/:id" element={<DeleteUser />} />
             <Route path="/mentorsmanage" element={<Mentorsmanage />} />
             <Route path="/coursemanage" element={<CourseManage />} />
+            <Route path="/sidebar" element={<SideBar />} />
+            <Route path="/navbar" element={<Navbar />} />
+            
+            
 
             {/* {mentor routes} */}
             <Route path="/mentorsignup" element={<Mentorssignup />} />

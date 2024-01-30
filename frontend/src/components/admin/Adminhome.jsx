@@ -1,31 +1,65 @@
-import React,{useEffect,useState} from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import RouterOutlet from "../RouterOutlet/RouterOutlet";
+// import React,{useEffect,useState} from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import RouterOutlet from "../RouterOutlet/RouterOutlet";
 
 
-function AdminHome(){
-    const navigate=useNavigate()
+// function AdminHome(){
+//     const navigate=useNavigate()
 
-    const logoutSubmit=()=>{
-        localStorage.removeItem("adminDetails")
-        localStorage.removeItem("accessToken")
-        navigate('../adminlogin')
-    }
+//     const logoutSubmit=()=>{
+//         localStorage.removeItem("adminDetails")
+//         localStorage.removeItem("accessToken")
+//         navigate('../adminlogin')
+//     }
  
-    return(
-        <>
-        <button onClick={logoutSubmit}>Logout </button>
-        <br />
-        <Link to="/admin-profile">ALL USERS</Link>
-        <br />
-        <Link to="/admin-home/mentors-manage">MENTORS</Link>
-        <br />
-        <Link to="/admin-home/course-manage">COURSES</Link>
+//     return(
+//         <>
+//         <button onClick={logoutSubmit}>Logout </button>
+//         <br />
+//         <Link to="/admin-profile">ALL USERS</Link>
+//         <br />
+//         <Link to="/admin-home/mentors-manage">MENTORS</Link>
+//         <br />
+//         <Link to="/admin-home/course-manage">COURSES</Link>
         
-        <RouterOutlet/>
-        </>
+//         <RouterOutlet/>
+//         </>
         
-    )
-}
-export default AdminHome
+//     )
+// }
+// export default AdminHome
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import RouterOutlet from "../RouterOutlet/RouterOutlet";
+import SideBar from "./SideBar";
+import Navbar from "./Navbar";
+
+const AdminHome = () => {
+  const navigate = useNavigate();
+
+  const logoutSubmit = () => {
+    localStorage.removeItem("adminDetails");
+    localStorage.removeItem("accessToken");
+    navigate("../adminlogin");
+  };
+
+  return (
+    <div style={{ display: "flex" }}>
+     
+      
+      <SideBar />
+
+      
+      <div style={{ flex: 1, padding: "10px" }}>
+        <button onClick={logoutSubmit}>Logout</button>
+        <br />
+        
+        <RouterOutlet />
+      </div>
+    </div>
+  );
+};
+
+export default AdminHome;

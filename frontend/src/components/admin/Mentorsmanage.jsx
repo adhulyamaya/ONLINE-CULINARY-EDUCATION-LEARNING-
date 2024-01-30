@@ -4,6 +4,7 @@ import mentoraxios from '../../axios/mentoraxios'
 import axiosIns from '../../axios/adminaxios'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button } from 'bootstrap'
+import SideBar from './SideBar'
 
 const Mentorsmanage = () => {
    const navigate = useNavigate()
@@ -50,7 +51,11 @@ const handleApproval = (mentorId, isApproved) => {
 };
 
   return (
+
+   
     <div className='container'>
+
+<SideBar/>
       <h1>MENTORS</h1>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}> 
         <thead>
