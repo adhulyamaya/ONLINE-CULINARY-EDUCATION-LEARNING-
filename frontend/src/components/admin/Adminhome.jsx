@@ -35,6 +35,8 @@ import { useNavigate } from "react-router-dom";
 import RouterOutlet from "../RouterOutlet/RouterOutlet";
 import SideBar from "./SideBar";
 import Navbar from "./Navbar";
+import "./adminhome.css"
+
 
 const AdminHome = () => {
   const navigate = useNavigate();
@@ -46,19 +48,18 @@ const AdminHome = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-     
-      
-      <SideBar />
-
-      
-      <div style={{ flex: 1, padding: "10px" }}>
-        <button onClick={logoutSubmit}>Logout</button>
-        <br />
-        
-        <RouterOutlet />
+    <>
+      <div className="backgrnd" style={{ display: "flex" }}> 
+      {/* <Navbar />        */}
+        <SideBar />  
+         
+        <div style={{ flex: 1, padding: "10px" }}>
+          <button onClick={logoutSubmit}>Logout</button>
+          <br />        
+          <RouterOutlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
