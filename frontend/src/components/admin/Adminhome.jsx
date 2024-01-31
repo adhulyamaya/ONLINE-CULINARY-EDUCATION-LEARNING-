@@ -36,6 +36,7 @@ import RouterOutlet from "../RouterOutlet/RouterOutlet";
 import SideBar from "./SideBar";
 import Navbar from "./Navbar";
 import "./adminhome.css"
+import Box from '@mui/material/Box';
 
 
 const AdminHome = () => {
@@ -50,15 +51,19 @@ const AdminHome = () => {
   return (
     <>
       <div className="backgrnd" style={{ display: "flex" }}> 
-      {/* <Navbar />        */}
+      <Navbar />
+      <Box sx={{ display: 'flex' }}></Box>       
         <SideBar />  
          
-        <div style={{ flex: 1, padding: "10px" }}>
+        {/* <div style={{ flex: 1, padding: "10px" }}>
           <button onClick={logoutSubmit}>Logout</button>
           <br />        
-          <RouterOutlet />
-        </div>
+         
+        </div> */}
+        
+        <RouterOutlet />
       </div>
+     
     </>
   );
 };

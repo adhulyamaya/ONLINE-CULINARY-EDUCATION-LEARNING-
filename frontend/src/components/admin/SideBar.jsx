@@ -1,145 +1,3 @@
-// import React from 'react'
-// import { Link } from "react-router-dom";
-// import * as FaIcons from "react-icons/fa";
-// import * as AiIcons from "react-icons/ai";
-// import * as IoIcons from "react-icons/io";
-
-// const SideBar = () => {
-//   return (
-//     <div style={{ width: "200px", backgroundColor: "#808080", padding: "100px" }}>
-//       <Link to="/admin-profile"><IoIcons.IoMdPeople /> ALL USERS</Link>
-//       <br />
-//       <Link to="/admin-home/mentors-manage"><FaIcons.FaUser /> MENTORS</Link>
-//       <br />
-//       <Link to="/admin-home/course-manage"><AiIcons.AiOutlineBook />COURSES</Link>
-//     </div>
-//   );
-// };
-// export default SideBar
-
-
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import Drawer from '@mui/material/Drawer';
-// import Button from '@mui/material/Button';
-// import List from '@mui/material/List';
-// import Divider from '@mui/material/Divider';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemButton from '@mui/material/ListItemButton';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import HomeIcon from '@mui/icons-material/Home';
-// import InfoIcon from '@mui/icons-material/Info';
-// import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-// import { Link } from "react-router-dom";
-// import * as FaIcons from "react-icons/fa";
-// import * as AiIcons from "react-icons/ai";
-// import * as IoIcons from "react-icons/io";
-// import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-// import NotificationsIcon from '@mui/icons-material/Notifications';
-
-// const SideBar = () => {
-
-//     const [state, setState] = React.useState({
-//         top: false,
-//         left: false,
-//         bottom: false,
-//         right: false,
-//     });
-
-//     const toggleDrawer = (anchor, open) => (event) => {
-//         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-//             return;
-//         }
-
-//         setState({ ...state, [anchor]: open });
-//     };
-
-
-//     const list = (anchor) => (
-//         <Box
-//             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-//             role="presentation"
-//             onClick={toggleDrawer(anchor, false)}
-//             onKeyDown={toggleDrawer(anchor, false)}
-//         >
-//             <List>
-//             <ListItem disablePadding>
-//                 <ListItemButton>
-//                     <ListItemIcon>
-//                         <PeopleAltIcon />
-//                     </ListItemIcon>
-                    // <Link to="/admin-profile">
-                    //     <ListItemText primary={<span>ALL USERS</span>} />
-                    // </Link>
-//                 </ListItemButton>
-//             </ListItem>
-
-//                 <ListItem disablePadding>
-//                       <ListItemButton>
-//                           <ListItemIcon>
-//                               <InfoIcon />
-//                           </ListItemIcon>
-//                           <ListItemText primary={<Link to="/admin-home/course-manage">
-//                        <AiIcons.AiOutlineBook />
-//                        <span>COURSES</span>
-//                      </Link>} />
-//                     </ListItemButton>
-
-
-//                 </ListItem>
-//                 <ListItem disablePadding>
-//                     <ListItemButton>
-//                         <ListItemIcon>
-
-//                             <PermContactCalendarIcon />
-//                         </ListItemIcon>
-            //             <ListItemText primary={<Link to="/admin-home/mentors-manage">
-            //    <FaIcons.FaUser />
-            //   <span>MENTORS</span>
-            // </Link>} />
-
-//                     </ListItemButton>
-//                 </ListItem>
-//             </List>
-//             <Divider />
-//             <List>
-//                 <ListItem disablePadding>
-//                     <ListItemButton>
-//                         <ListItemIcon>
-//                             <NotificationsIcon />
-//                         </ListItemIcon>
-//                         <ListItemText primary={"Notification"} />
-//                     </ListItemButton>
-//                 </ListItem>
-//             </List>
-//         </Box>
-//     );
-
-//     return (
-//         <div className='Navbar'>
-//             <MenuIcon
-//                 onClick={
-//                     toggleDrawer("left", true)
-//                 }
-//             />
-
-//             <Drawer
-//                 anchor={"left"}
-//                 open={state["left"]}
-//                 onClose={toggleDrawer("left", false)}
-//             >
-//                 {list("left")}
-//             </Drawer>
-
-//         </div>
-//     )
-// }
-// export default SideBar;
-
-
-
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -160,8 +18,8 @@ import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
-
-
+// import { useAppstore } from '../../store/appStore';
+import useAppstore from '../../store/appStore'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -192,25 +50,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
-
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== 'open',
-// })(({ theme, open }) => ({
-//   zIndex: theme.zIndex.drawer + 1,
-//   transition: theme.transitions.create(['width', 'margin'], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     marginLeft: drawerWidth,
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(['width', 'margin'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }));
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
@@ -230,46 +69,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function SideBar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+//   const [open, setOpen] = React.useState(true);
+  const updateOpen = useAppstore((state).state.updateOpen)
+  const open = useAppstore((state).state.dopen)
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-
-      {/* <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
-
-
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          {/* <IconButton onClick={()=>setOpen(!open)}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+          </IconButton> */}
         </DrawerHeader>
         <Divider />
         <List>
@@ -289,7 +101,6 @@ export default function SideBar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                   <InboxIcon />
                 </ListItemIcon>
                         
@@ -316,7 +127,7 @@ export default function SideBar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary={<Link to="/admin-profile">
@@ -339,7 +150,6 @@ export default function SideBar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary={<Link to="/admin-home/mentors-manage">
@@ -368,7 +178,6 @@ export default function SideBar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary="home"  sx={{ opacity: open ? 1 : 0 }} />
@@ -376,24 +185,6 @@ export default function SideBar() {
             </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        
-      </Box>
     </Box>
   );
 }

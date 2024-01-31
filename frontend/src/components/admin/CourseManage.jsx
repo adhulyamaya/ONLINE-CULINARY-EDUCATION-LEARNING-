@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import axiosInstance from '../../axios/adminaxios'
+import SideBar from './SideBar'
 
 const CourseManage = () => {
     const[classdata,setClassdata]=useState([])
@@ -21,6 +22,7 @@ const CourseManage = () => {
 
   return (
     <div class='container'>
+        <SideBar/>
         <h1>COURSES</h1>
         <table style={{ borderCollapse: 'collapse', width: '100%' }}> 
         <thead>
