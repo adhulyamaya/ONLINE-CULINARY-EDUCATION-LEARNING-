@@ -63,7 +63,7 @@ const AdminHome = () => {
         </Box>  
      
         
-          <button onClick={logoutSubmit}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</button>
+          <button onClick={logoutSubmit}>logoutyyyyyyyyyyyyyyyyyyyyyy</button>
           <br />        
          
       
