@@ -18,8 +18,8 @@ import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
-// import { useAppstore } from '../../store/appStore';
-import useAppstore from '../../store/appStore'
+import {useAppstore} from '../../store/appStore';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -68,24 +68,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBar() {
+  
   const theme = useTheme();
-//   const [open, setOpen] = React.useState(true);
-  const updateOpen = useAppstore((state).state.updateOpen)
-  const open = useAppstore((state).state.dopen)
+  const state = useAppstore((state) => state);
+  const open = state.dopen;
 
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          {/* <IconButton onClick={()=>setOpen(!open)}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton> */}
-        </DrawerHeader>
         <Divider />
         <List>
-          {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => ( */}
             <ListItem  disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{

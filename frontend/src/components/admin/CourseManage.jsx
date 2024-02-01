@@ -2,6 +2,8 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import axiosInstance from '../../axios/adminaxios'
 import SideBar from './SideBar'
+import Navbar from './Navbar'
+import Box from '@mui/material/Box';
 
 const CourseManage = () => {
     const[classdata,setClassdata]=useState([])
@@ -21,7 +23,12 @@ const CourseManage = () => {
     },[])
 
   return (
-    <div class='container'>
+    <>
+    <Navbar/>
+    {/* <div class='container'> */}
+        
+
+        <Box sx={30}/>
         <SideBar/>
         <h1>COURSES</h1>
         <table style={{ borderCollapse: 'collapse', width: '100%' }}> 
@@ -40,7 +47,8 @@ const CourseManage = () => {
         </thead>
         </table>
       
-    </div>
+    {/* </div> */}
+    </>
   )
 }
 

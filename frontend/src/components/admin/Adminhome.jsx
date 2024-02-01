@@ -50,19 +50,26 @@ const AdminHome = () => {
 
   return (
     <>
-      <div className="backgrnd" style={{ display: "flex" }}> 
-      <Navbar />
-      <Box sx={{ display: 'flex' }}></Box>       
-        <SideBar />  
-         
-        {/* <div style={{ flex: 1, padding: "10px" }}>
-          <button onClick={logoutSubmit}>Logout</button>
+    <Navbar />
+
+      <Box sx={30}/>
+
+      <Box sx={{ display: 'flex' }}>     
+        <SideBar /> 
+        <Box sx={{ flexGrow:1,p:3 }}>    
+        <div className="backgrnd" >
+          </div> 
+          </Box> 
+        </Box>  
+     
+        
+          <button onClick={logoutSubmit}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</button>
           <br />        
          
-        </div> */}
+      
         
         <RouterOutlet />
-      </div>
+    
      
     </>
   );
