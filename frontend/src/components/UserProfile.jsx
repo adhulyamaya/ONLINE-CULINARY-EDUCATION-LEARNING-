@@ -5,11 +5,16 @@ import { storage } from "../../src/firebase/firebaseconfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import axios from 'axios';
+import "./userprofile.css"
+import { Link } from 'react-router-dom';
+
+
 const UserProfile = () => {
     const [image,setImage]=useState('')
     const navigate = useNavigate()
     const [udata,setUdata] = useState("")
     const [imageUrl,setImageUrl] = useState("")
+    const [updateStatus, setUpdateStatus] = useState('not-updated');
   
     useEffect(()=>{
       const userobj = localStorage.getItem("userDetails")
@@ -35,6 +40,7 @@ const UserProfile = () => {
         axiosInstance.post("image-upload/",datas).then((response)=>{
           console.log(response.data,"RESPONSE DATAS")
           setUdata(response.data.details)
+          setUpdateStatus('updated');
         }).catch((error)=>{
           alert(error)
         })
@@ -45,25 +51,35 @@ const UserProfile = () => {
     const homeSubmit=()=>{
         navigate('../')
     } 
-  return (
-    <div>
-      <h1>userprofile</h1>
-      <div>
-        <h1>{udata.name} </h1>
-        <h3>{udata.username} </h3>
-        <p>{udata.email} </p>
-        <p>{udata.phone} </p>
-        <p>{udata.password} </p>
+    return (
+      <>
+      
+      <div className='nokk'>
+      <br/>
+      <br/>
+      <h1>WELCOME <i>{udata.name}</i> </h1>
+      <br/>
+      <div className="user-profile-container">
+        <div className="login-form">
+        <div className='imgpr'>
+          <img src={udata.image} alt="image" />          
+        </div>
+        <input type="file" name='file' onChange={handleImage} />
+        <button onClick={handleApi} style={{ backgroundColor: '#8d63be', color: 'white',fontSize: '14px !important' }}> {updateStatus === 'not-updated' ? 'Update Photo' : 'Updated'}</button>
+       
+        <br />        
+        <div className="user-info">
+          <h3>{udata.username}</h3>
+          <p>Email: {udata.email}</p>
+          <p>User ID: {udata.id}</p>
+        </div>
+        </div>        
+        <br />
+        <Link to="/">Back to Home</Link>
       </div>
-      <div>
-        <img src={udata.image} alt="image" />
       </div>
-      <input type="file" name='file' onChange={handleImage} />
-    <button onClick={handleApi}>Submit</button>
-    <br />
-    <br />
-    <button onClick={homeSubmit}>back to home</button>
-    </div>
-  )
+      </>
+    );
+    
 }
 export default UserProfile

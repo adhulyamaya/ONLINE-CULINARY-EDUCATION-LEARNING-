@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
-import "./adminlogin.css";
+// import "./adminlogin.css";
 import axiosInstance from "../../axios/adminaxios";
 import { useNavigate } from "react-router-dom";
 
 
-const SignupForm = () => {
+const Adminlogin = () => {
     const [adminUsername, setUsername] = useState("");
     const [adminPassword, setPassword] = useState("");
     const [error,setError]=useState(null);
@@ -42,7 +42,7 @@ const SignupForm = () => {
 
     return (
         <>
-            <div className="bgImg"></div>
+            <div className="bgImg">
             <div className="container">
                 <form onSubmit={handleSignup}>
                     <h1>Sign Up</h1>
@@ -75,13 +75,12 @@ const SignupForm = () => {
                     Already have an account? <span>Login</span>
                 </div> */}
             </div>
+            </div>
         </>
     );
 };
 
-export default SignupForm;
-
-
+export default Adminlogin;
 
 
 
