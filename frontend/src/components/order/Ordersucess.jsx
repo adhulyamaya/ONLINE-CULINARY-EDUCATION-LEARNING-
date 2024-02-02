@@ -5,8 +5,6 @@ import VideoPlayer from '../videoclass/VideoPlayer';
 import Hero from '../home/hero/Hero';
 import Back from '../common/back/Back';
 
-
-
 const Ordersucess = () => { 
   const [joined, setJoined] = useState(false);
   

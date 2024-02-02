@@ -25,6 +25,7 @@ import Adminlogin from "./components/admin/Adminlogin";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import SideBar from "./components/admin/SideBar";
 import Navbar from "./components/admin/Navbar";
+import PurchasedCourses from "./components/mentor/PurchasedCourses";
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
@@ -112,6 +113,7 @@ function App() {
             <Route path ="/addclass" element={<AddClass/>}/>
             <Route path="/classmanagement/editclass/:id" element={<EditClass />} />
             <Route path="/classmanagement/deleteclass/:id" element={<DeleteClass />} />
+            <Route path="/purchased courses" element={<PurchasedCourses />} />
 
           </Routes>
         </Suspense>
