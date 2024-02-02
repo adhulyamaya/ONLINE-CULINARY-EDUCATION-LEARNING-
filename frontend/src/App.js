@@ -79,7 +79,7 @@ function App() {
             <Route  path="/journal" element={<Blog />} />
             <Route  path="/contact" element={<Contact />} />
             <Route path="/checkout/:courseId" element={<Chekout />} />
-            <Route path="/ordersuceess" element={<Ordersucess/>}/>
+            <Route path="/ordersuccess" element={<Ordersucess/>}/>
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
  */}

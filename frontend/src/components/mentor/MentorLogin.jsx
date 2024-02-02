@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios/mentoraxios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import "./mentorlogin.css"
 
 const Userlogin = () => {
   const [name, setname] = useState("");
@@ -32,6 +33,10 @@ const Userlogin = () => {
   };
 
   return (
+
+
+    <>
+    <div className="login-container">
     <div className="wrapper">
       <h2>MENTOR LOGIN </h2><br />
       <p>Are you a user {'>>>'}<Link to="/signup"> Login here</Link></p  >
@@ -59,6 +64,8 @@ const Userlogin = () => {
         Don't have an account? <Link to="/mentorsignup">Sign Up here</Link>
       </p>
     </div>
+    </div>
+    </>
   );
 };
 

@@ -13,7 +13,8 @@ urlpatterns = [
     path('editing/',EditingView.as_view(),name="editing"),
     path('deleteuser/<int:id>',DeleteView.as_view(),name="deleteuser"),
     path('searchuser/',SearchView.as_view(),name="searchuser"),
-    path('course-listing/',CourseListing.as_view(),name="courselisting")
+    path('course-listing/',CourseListing.as_view(),name="courselisting"),
+    path('purchased-courses/',PurchasedCourseListing.as_view(),name="purchasedcourses")
 
 ]
 

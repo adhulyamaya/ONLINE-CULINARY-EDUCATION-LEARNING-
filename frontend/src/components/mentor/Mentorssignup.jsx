@@ -40,6 +40,8 @@ const Mentorssignup= () => {
   }
 
   return (
+    <>
+    <div className="login-container">
     <div className="wrapper">
       <h2 >MENTOR SIGNUP</h2><br /><br />
       <h4 >Welcome</h4>
@@ -64,6 +66,7 @@ const Mentorssignup= () => {
                 Already have an account? <Link to="/mentorlogin">Login here</Link>
               </p>
     </div>
+    </div></>
   );
 }
 export default Mentorssignup

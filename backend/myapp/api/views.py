@@ -178,7 +178,11 @@ class SearchView(APIView):
         return Response({"message":"success","data":filtered_users_serialized.data})
 
 
-
+class PurchasedCourseListing(APIView):
+    def post(self,request):
+        return Response({"message":"failed"})
+          
+    
 
 
 

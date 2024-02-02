@@ -4,26 +4,24 @@ import axiosInstance from '../../axios/axios';
 import axiosIns from '../../axios/adminaxios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
-
 const AdminProfile = () => {
   const navigate = useNavigate()
 
-  const editHandle=(id)=>{
-    navigate(`../edit/${id}`)
-  }
   const homeSubmit=()=>{
     navigate('../home')  
       
 } 
-  const deleteHandle=(id)=>{
-    navigate(`../delete/${id}`)
 
-  }
-  
 
-const [userdata,setUserdata]=useState([])
-// const [searchData,setSearchData]=useState("")
+const [userdata,setUserdata]=useState([]);
+
+const toggleBlock = (userId) => {
+  setUserdata((prevData) => {
+    const updatedData = prevData.map((user) =>
+      user.id === userId ? { ...user, blocked: !user.blocked } : user
+    );
+    return updatedData;
+  });};
 
 
 useEffect(()=>{
@@ -36,25 +34,12 @@ useEffect(()=>{
 
 },[])
 
-// const handleSearchSubmit=()=>{
-//   const datas={
-//     value:searchData
-//   }
-//   axiosInstance.post("searchuser/",datas).then((response)=>{
-//     setUserdata(response.data.data)
-//   }).catch((error)=>{
-//     alert(error)
-//   })
-// }
 
 console.log(userdata,"jiiii");
   return (
     <div className='container'>
       <h1>USERS</h1>
-      {/* <Link to="/create" className='btn btn-success my-3'>Create+</Link> */}
-      {/* <input type="text" placeholder='Search'  onChange={(e)=>setSearchData(e.target.value)}/> */}
-      {/* <button onClick={handleSearchSubmit}>Search</button> */}
-      {/* <table className='table'> */}
+      
       <table style={{ borderCollapse: 'collapse', width: '100%' }}> 
         <thead>
             <tr>
@@ -70,12 +55,17 @@ console.log(userdata,"jiiii");
               <td>{item.username} </td>
               <td>{item.name} </td>
               <td>{item.email}</td>
-              <td>{item.image}</td>
+              {/* <td>{item.image}</td> */}
+              <td>
+                <img src={item.image} alt="User Image" style={{ width: '50px', height: '50px' }} />
+              </td>
               <td>{item.phone}</td>
-              {/* <td>
-                <button onClick={()=>editHandle(item.id)} className='btn btn-sm btn-primary'>EDIT</button>
-                <button onClick={()=>deleteHandle(item.id)} className='btn btn-sm btn-danger ms-2'>DELETE</button>
-              </td> */}
+              <td>
+                <button onClick={() => toggleBlock(item.id)}>
+                  {item.blocked ? 'Unlock' : 'Block'}
+                </button>
+              </td>
+            
             </tr>
             ))}
             </thead>
