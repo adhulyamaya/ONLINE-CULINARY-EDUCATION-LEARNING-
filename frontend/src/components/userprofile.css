@@ -14,6 +14,7 @@
 }
 h1 {
   -webkit-text-fill-color:#8d63be;
+  -webkit-text-fill-color:#a07fa0;
   text-align: center;
   margin-bottom: 40px; /* Add spacing between the welcome message and the login form */
 }
