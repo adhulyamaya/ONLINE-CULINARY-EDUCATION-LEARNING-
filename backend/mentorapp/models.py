@@ -30,7 +30,7 @@ class Class(models.Model):
     thumbnail = models.ImageField(max_length=500,default="")
     schedule = models.CharField(max_length=255,null=True, blank=True)   
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
-
+    enabled = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.class_name} - {self.mentor.name}"
