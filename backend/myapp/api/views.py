@@ -13,21 +13,41 @@ from rest_framework_simplejwt.tokens import RefreshToken
 # Create  here.
 
 
-class LoginView(APIView):
-    def post(self,request):
-        username=request.data.get('username')
-        password=request.data.get('password')
+# class LoginView(APIView):
+#     def post(self,request):
+#         username=request.data.get('username')
+#         password=request.data.get('password')
 
-        userobj = UserProfile.objects.get(username=username,password=password)
-        print(userobj,"?????????????////////")
-        if userobj:
-            refresh = RefreshToken.for_user(userobj)
-            serialized = UserProfileSerializer(userobj)
-            print(serialized.data,"{{{{{{serialized.data}}}}}}")
-            return Response({"message":"success","userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
-        else:
-            return Response({"message":"invalid credentials"})
+#         userobj = UserProfile.objects.get(username=username,password=password)
+#         print(userobj,"?????????????////////")
+#         if userobj:
+#             refresh = RefreshToken.for_user(userobj)
+#             serialized = UserProfileSerializer(userobj)
+#             print(serialized.data,"{{{{{{serialized.data}}}}}}")
+#             return Response({"message":"success","userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
+#         else:
+#             return Response({"message":"invalid credentials"})
         
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        try:
+            userobj = UserProfile.objects.get(username=username, password=password)
+            if userobj.blocked:
+                return Response({"message": "error", "error": "User is blocked"})
+        except UserProfile.DoesNotExist:
+            return Response({"message": "error", "error": "Invalid credentials"})
+
+        refresh = RefreshToken.for_user(userobj)
+        serialized = UserProfileSerializer(userobj)
+        return Response({
+            "message": "success",
+            "userdata": serialized.data,
+            "refresh": str(refresh),
+            "access": str(refresh.access_token)
+        })
 
 
 class GoogleLoginView(APIView):
