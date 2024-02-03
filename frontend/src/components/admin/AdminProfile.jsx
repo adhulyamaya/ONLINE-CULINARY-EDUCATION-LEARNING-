@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axiosInstance from '../../axios/axios';
 import axiosIns from '../../axios/adminaxios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -12,16 +11,27 @@ const AdminProfile = () => {
       
 } 
 
-
 const [userdata,setUserdata]=useState([]);
 
 const toggleBlock = (userId) => {
-  setUserdata((prevData) => {
-    const updatedData = prevData.map((user) =>
-      user.id === userId ? { ...user, blocked: !user.blocked } : user
-    );
-    return updatedData;
-  });};
+  axiosIns.patch(`toggle-block/${userId}/`)
+  
+    .then((res) => {
+      if (res.data.success) {
+        setUserdata((prevData) => {
+          const updatedData = prevData.map((user) =>
+            user.id === userId ? { ...user, blocked: !user.blocked } : user
+          );
+          return updatedData;
+        });
+      } else {
+        console.error('Toggle block failed');
+      }
+    })
+    .catch((error) => {
+      console.error('Toggle blockkkkkkkkkkkkkkkkkkk failed', error);
+    });
+};
 
 
 useEffect(()=>{

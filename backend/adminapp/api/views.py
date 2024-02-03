@@ -92,8 +92,28 @@ class MentorApprovalView(APIView):
 
 
 
+# class ToggleBlockUnblockView(APIView):
+#     def post(self, request, user_id):
+#         user_profiles = UserProfile.objects.filter(id=user_id)
+#         user_profiles.blocked = not user_profiles.blocked
+#         user_profiles.save()
+
+#         return Response({'success': True})
 
 
+class ToggleBlockUnblockView(APIView):
+    def patch(self, request, user_id):
+        print(user_id,"user id vanno")
+        user_profiles = UserProfile.objects.filter(id=user_id)
+
+        if not user_profiles.exists():
+            return Response({'success': False, 'error': 'User not found'})
+
+        user_profile = user_profiles.first()
+        user_profile.blocked = not user_profile.blocked
+        user_profile.save()
+
+        return Response({'success': True})
 
     
 

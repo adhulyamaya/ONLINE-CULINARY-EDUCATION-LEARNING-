@@ -8,6 +8,7 @@ class UserProfile(models.Model):
     phone = models.PositiveIntegerField(blank=True, null=True)
     password = models.CharField(max_length=50)
     image = models.CharField(max_length=200)
+    blocked = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} {self.id}"

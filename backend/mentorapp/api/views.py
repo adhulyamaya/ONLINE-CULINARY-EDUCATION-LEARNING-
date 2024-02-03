@@ -147,15 +147,7 @@ class ToggleEnableDisableView(APIView):
     
         course = Class.objects.get(id=id)
         print(course,"?????????????????????")
-        
-            
-
-        # Your authorization logic here, e.g., check if the user is the mentor of the course
-
-        # Toggle the enable/disable status
         course.enabled = not course.enabled
         course.save()
-
-        # Serialize the updated course and send the response
         serialized = ClassSerializer(course)
         return Response({"message": "success", "data": serialized.data})
