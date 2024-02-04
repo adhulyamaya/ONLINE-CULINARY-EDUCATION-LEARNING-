@@ -32,6 +32,9 @@ const MentorDashboard = () => {
   const classManagement = () => {
     navigate("../classmanagement");
   };
+  const EntrolledStudents = () => {
+    navigate("/purchased courses");
+  };
 
   return (
     <div style={{ display: "flex" }}>
@@ -40,7 +43,10 @@ const MentorDashboard = () => {
         <div style={menuItemStyle} onClick={classManagement}>
           Class Management
         </div>
-        {/* Add more menu items as needed */}
+        <div style={menuItemStyle} onClick={EntrolledStudents}>
+          Entrolled Students
+        </div>
+       
       </div>
 
       {/* Main Content */}

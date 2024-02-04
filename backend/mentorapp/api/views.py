@@ -53,6 +53,9 @@ class MentorOnboard(APIView):
         image=request.data.get('image')
         address=request.data.get('address')
         certificate=request.data.get('certificate')
+        availability_start_time = request.data.get('availability_start_time')
+        availability_end_time = request.data.get('availability_end_time')
+
         mentor_profile.fullname=fullname
         mentor_profile.email = email
         mentor_profile.bio = bio
@@ -62,6 +65,8 @@ class MentorOnboard(APIView):
         mentor_profile.image=image
         mentor_profile.address=address
         mentor_profile.certificate=certificate
+        mentor_profile.availability_start_time = availability_start_time
+        mentor_profile.availability_end_time = availability_end_time
         # mentor_profile.is_approved = False
         mentor_profile.save()
         return Response({"message":"success"})
@@ -151,3 +156,31 @@ class ToggleEnableDisableView(APIView):
         course.save()
         serialized = ClassSerializer(course)
         return Response({"message": "success", "data": serialized.data})
+
+
+class MentorAvailabilityView(APIView):
+    def get(self, request, mentor_id):
+        # Retrieve available time slots from the database or any other source
+        # This is a placeholder, adjust it based on how you store mentor availability in your model
+        try:
+            mentor = MentorProfile.objects.get(id=mentor_id)
+            available_times = self.get_available_times(mentor)
+            return Response(available_times)
+        except MentorProfile.DoesNotExist:
+            return Response({"error": "Mentor not found"})
+
+# class MentorAvailabilityView(APIView):
+#     def get(self, request):
+#         print(request.data )
+#         # Retrieve available time slots from the database or any other source
+#         # This is a placeholder, adjust it based on how you store mentor availability in your model
+#         try:
+#             mentor_id = request.data.get('mentor_id')
+#             print(mentor_id,"aara")
+#             mentor = MentorProfile.objects.get(id=mentor_id)
+#             available_times = self.get_available_times(mentor)
+#             print(available_times,"vanno")
+#             return Response(available_times)
+#         except MentorProfile.DoesNotExist:
+#             return Response({"error": "Mentor not found"})
+        

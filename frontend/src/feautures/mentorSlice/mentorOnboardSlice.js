@@ -45,10 +45,17 @@ const mentoronboardSlice = createSlice(
             },
             changeCertificate:(state,action)=>{
                 state.value.certificate=action.payload
-            },                    
+            },   
+
+            changeAvailabilityStartTime: (state, action) => {
+                state.value.availability_start_time = action.payload;
+              },
+              changeAvailabilityEndTime: (state, action) => {
+                state.value.availability_end_time = action.payload;
+              },
         }        
     }
 )
 
-export const {changeFullname,changeEmail,changeBio,changeExpertise,changeExperience,changeAge,changeImage,changeAddress,changeCertificate} = mentoronboardSlice.actions
+export const {changeFullname,changeEmail,changeBio,changeExpertise,changeExperience,changeAge,changeImage,changeAddress,changeCertificate,changeAvailabilityStartTime,changeAvailabilityEndTime} = mentoronboardSlice.actions
 export default mentoronboardSlice.reducer

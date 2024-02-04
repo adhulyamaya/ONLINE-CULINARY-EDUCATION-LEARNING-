@@ -9,6 +9,8 @@ import {
   changeImage,
   changeAddress,
   changeCertificate,
+  changeAvailabilityStartTime,
+  changeAvailabilityEndTime
 } from "../../feautures/mentorSlice/mentorOnboardSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -34,6 +36,8 @@ const Onboard = () => {
       image: mentoronboard.value.image,
       address: mentoronboard.value.address,
       certificate: mentoronboard.value.certificate,
+      availability_start_time: mentoronboard.value.availability_start_time,
+      availability_end_time: mentoronboard.value.availability_end_time,
     };
 
     axiosInstance.post("mentoronboard/", datas).then((res) => {
@@ -136,6 +140,24 @@ const Onboard = () => {
           id="certificate"
           placeholder="Certificate"
           onChange={(e) => dispatch(changeCertificate(e.target.value))}
+        />
+      </div>
+      <div className="form-group mb-1">
+        <label htmlFor="availability_start_time">Availability Start Time</label>
+        <input
+          type="time"
+          className="form-control"
+          id="availability_start_time"
+          onChange={(e) => dispatch(changeAvailabilityStartTime(e.target.value))}
+        />
+      </div>
+      <div className="form-group mb-1">
+        <label htmlFor="availability_end_time">Availability End Time</label>
+        <input
+          type="time"
+          className="form-control"
+          id="availability_end_time"
+          onChange={(e) => dispatch(changeAvailabilityEndTime(e.target.value))}
         />
       </div>
       <button className="btn btn-primary" type="button" onClick={mentorSubmit}>

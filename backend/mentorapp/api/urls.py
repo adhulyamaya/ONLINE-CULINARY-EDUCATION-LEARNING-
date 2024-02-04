@@ -11,4 +11,6 @@ urlpatterns = [
     path('deleteclass/<int:id>',DeleteView.as_view(),name="deleteclass"),
     path('classdetails/<int:id>/', ToggleEnableDisableView.as_view(), name='toggle_enable_disable'),
     path('classdetails/',ClassdetailsView.as_view(),name='classdetails'),
+    path('mentor-availability/<int:mentor_id>/',MentorAvailabilityView.as_view(),name='classdetails'),
+
 ]
