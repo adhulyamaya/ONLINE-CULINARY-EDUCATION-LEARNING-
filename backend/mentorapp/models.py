@@ -36,12 +36,12 @@ class Class(models.Model):
     def __str__(self):
         return f"{self.class_name} - {self.mentor.name}"
 
-class Order(models.Model):
-    student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    mentor = models.ForeignKey(MentorProfile, on_delete=models.CASCADE)
-    booked_class = models.ForeignKey(Class, on_delete=models.CASCADE)
-    order_date = models.DateField(auto_now_add=True)
-    order_time = models.TimeField(auto_now_add=True)
-    order_id = models.CharField(max_length=255, unique=True)
-    payment_status = models.CharField(max_length=50)
-    payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
+# class Order(models.Model):
+#     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+#     mentor = models.ForeignKey(MentorProfile, on_delete=models.CASCADE)
+#     booked_class = models.ForeignKey(Class, on_delete=models.CASCADE)
+#     order_date = models.DateField(auto_now_add=True)
+#     order_time = models.TimeField(auto_now_add=True)
+#     order_id = models.CharField(max_length=255, unique=True)
+#     payment_status = models.CharField(max_length=50)
+#     payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
