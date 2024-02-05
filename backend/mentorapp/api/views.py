@@ -160,10 +160,11 @@ class ToggleEnableDisableView(APIView):
 
 class MentorAvailabilityView(APIView):
     def get(self, request, mentor_id):
-        # Retrieve available time slots from the database or any other source
-        # This is a placeholder, adjust it based on how you store mentor availability in your model
+        print(mentor_id,"////////")
         try:
             mentor = MentorProfile.objects.get(id=mentor_id)
+            print(mentor,".............peru")
+            
             available_times = self.get_available_times(mentor)
             return Response(available_times)
         except MentorProfile.DoesNotExist:
@@ -183,4 +184,40 @@ class MentorAvailabilityView(APIView):
 #             return Response(available_times)
 #         except MentorProfile.DoesNotExist:
 #             return Response({"error": "Mentor not found"})
+        
+# class BookingStoringView(APIView):
+#     def post(self,request):
+class StoreOrderView(APIView):
+    def post(self, request):
+        try:
+            data = request.data
+            print(data,"nthoke datas vannitund")
+            # order_id = data.get('orderID')
+            client_id = data.get('clientID')
+            user_details = data.get('userDetails') 
+            course_details = data.get('courseDetails')
+            
+            print(course_details)
+            print(user_details,client_id,"//////////////") 
+            user_profile = UserProfile.objects.get(username=user_details.get('username'))
+            print(user_profile,"nthaaaaaaaaaaaaaaaaaaaaa")
+            order = Order.objects.create(
+                # username=user_details.get('username'),  
+                student = UserProfile.objects.get(username=user_details.get('username')),
+                # mentor=course_details.get('mentor'),
+                    # Adjust based on your actual course details
+                # booked_class=course_details.get('booked_class'),
+                # order_id=order_id,
+                # payment_status='Completed',  # Adjust based on your payment status
+                payment_amount=float(course_details.get('price')),  # Convert to float if needed               
+            )
+            order.save()
+            print(order,"order create aayo")
+
+            return Response({'success': True, 'message': 'Order details stored successfully'})
+        except Exception as e:
+             return Response({'success': False, 'message': str(e)})
+        
+
+
         

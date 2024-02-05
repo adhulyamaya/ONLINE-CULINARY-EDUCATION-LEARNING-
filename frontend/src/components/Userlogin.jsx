@@ -105,7 +105,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import './Userlogin.css';
 import Cookies from 'js-cookie';
-import { isAuthenticated } from './authUtils';
+// import { isAuthenticated } from './authUtils';
 
 const Userlogin = () => {
   const dispatch = useDispatch();
@@ -139,10 +139,10 @@ const Userlogin = () => {
       });
   };
 
-      if (isAuthenticated()) {
-        navigate('../');
-        return null;
-      }
+      // if (isAuthenticated()) {
+      //   navigate('../');
+      //   return null;
+      // }
 
 
   return (

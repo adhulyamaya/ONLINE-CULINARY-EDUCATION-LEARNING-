@@ -115,7 +115,7 @@ import { CLIENT_ID } from '../../config/Config';
 // import axiosInstance from '../../axios/axios';
 import { useNavigate } from 'react-router-dom';
 // import { isAuthenticated } from './authUtils'; // Assuming you have an isAuthenticated utility function
-import axiosInstance from "../../axios/adminaxios";
+import axiosInstance from "../../axios/mentoraxios";
 
 
 
@@ -147,7 +147,9 @@ const Checkout = () => {
         },
       ],
     }).then((orderID) => {
+      console.log(orderID)
       setOrderID(orderID);
+      console.log(orderID)
       return orderID;
     });
   };
@@ -164,9 +166,19 @@ const Checkout = () => {
 
   const sendDetailsToBackend = (orderID, courseInfo) => {
     const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const userId = userDetails.id;
+    console.log(userId)
 
-    // Assuming you have a backend endpoint for storing orders
-    axiosInstance.post('/api/storeOrder', {
+    const datas ={
+      orderID: orderID,
+      clientID: CLIENT_ID,
+      userDetails: userDetails,
+      courseDetails: courseInfo,
+    }
+    console.log(datas)
+
+    
+    axiosInstance.post('storeOrder/', {
       orderID: orderID,
       clientID: CLIENT_ID,
       userDetails: userDetails,
@@ -174,7 +186,7 @@ const Checkout = () => {
     })
     .then((response) => {
       console.log('Order details stored on the backend:', response.data);
-      // Handle the response as needed
+      
     })
     .catch((error) => {
       console.error('Error storing order details on the backend:', error);

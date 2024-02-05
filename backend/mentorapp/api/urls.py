@@ -12,5 +12,7 @@ urlpatterns = [
     path('classdetails/<int:id>/', ToggleEnableDisableView.as_view(), name='toggle_enable_disable'),
     path('classdetails/',ClassdetailsView.as_view(),name='classdetails'),
     path('mentor-availability/<int:mentor_id>/',MentorAvailabilityView.as_view(),name='classdetails'),
+    # path('booking/',BookingStoringView.as_view(),name='booking'),
+    path('storeOrder/',StoreOrderView.as_view(),name='storeOrder'),
 
 ]

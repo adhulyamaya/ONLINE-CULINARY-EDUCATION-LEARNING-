@@ -8,3 +8,7 @@ from mentorapp.models import *
 
 admin.site.register(MentorProfile)
 admin.site.register(Class )
+
+
+
+admin.site.register(Order)

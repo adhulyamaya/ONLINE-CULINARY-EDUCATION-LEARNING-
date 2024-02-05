@@ -29,6 +29,7 @@ const AddClass = () => {
       mentorId: mentorId, 
     };
 
+    
     console.log(datas, "create class details");
 
     axiosInstance.post('addclass/', datas)
