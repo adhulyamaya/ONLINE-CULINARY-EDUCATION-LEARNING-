@@ -197,21 +197,25 @@ class StoreOrderView(APIView):
             user_details = data.get('userDetails') 
             course_details = data.get('courseDetails')
             
-            print(course_details)
-            print(user_details,client_id,"//////////////") 
+            print(course_details,"course details vanno")
+            print(user_details,client_id,"user details oo") 
             user_profile = UserProfile.objects.get(username=user_details.get('username'))
             print(user_profile,"nthaaaaaaaaaaaaaaaaaaaaa")
+
+
+            user_id = user_details.get('id')  
+            print(user_id,"...................................kk")
+            course_id = course_details.get('class_id')
+            print(course_id,";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;kk")
+            class_name = course_details.get('class_name')
+            booked_class = Class.objects.get(class_name=class_name)
+
             order = Order.objects.create(
-                # username=user_details.get('username'),  
-                student = UserProfile.objects.get(username=user_details.get('username')),
-                # mentor=course_details.get('mentor'),
-                    # Adjust based on your actual course details
-                # booked_class=course_details.get('booked_class'),
-                # order_id=order_id,
-                # payment_status='Completed',  # Adjust based on your payment status
-                payment_amount=float(course_details.get('price')),  # Convert to float if needed               
+                student_id=user_id,
+                booked_class=booked_class,
+                payment_amount=course_details.get('price'),
             )
-            order.save()
+            # order.save()
             print(order,"order create aayo")
 
             return Response({'success': True, 'message': 'Order details stored successfully'})

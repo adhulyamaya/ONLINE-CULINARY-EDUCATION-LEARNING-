@@ -179,8 +179,8 @@ const Checkout = () => {
 
     
     axiosInstance.post('storeOrder/', {
-      orderID: orderID,
-      clientID: CLIENT_ID,
+      // orderID: orderID,
+      // clientID: CLIENT_ID,
       userDetails: userDetails,
       courseDetails: courseInfo,
     })
@@ -203,7 +203,7 @@ const Checkout = () => {
     }
   }, [success, orderID, CLIENT_ID, navigate]);
 
-  return (
+  return (                                                                                          
     <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
       <div>
         {courseId ? (
