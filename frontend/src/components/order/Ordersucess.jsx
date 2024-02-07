@@ -130,7 +130,7 @@ import Cookies from 'js-cookie';
 import { useLocation } from "react-router-dom";
 
 
-const Ordersucess = () => { 
+const Ordersucess = ({orderIdFromBackend}) => { 
   const [joined, setJoined] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
   const location = useLocation();
@@ -143,8 +143,8 @@ const Ordersucess = () => {
   console.log(mentorId,".........")
   // const mentorId = Cookies.get('id');
   // console.log(mentorId,".........")
-  const orderId = location.state?.orderId || null;
-  console.log(orderId)
+  const orderId = location.state?.orderId || orderIdFromBackend;
+  console.log(orderIdFromBackend,".........")
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
