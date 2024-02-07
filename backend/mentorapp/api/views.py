@@ -240,15 +240,18 @@ class UpdateBookingDetailsView(APIView):
             booking_date = data.get('selectedDate')
             print(booking_date,"booking_date")
             booking_time = data.get('selectedTime')
-            booking_ampm = data.get('booking_ampm')
+            # booking_ampm = data.get('booking_ampm')
 
             order = Order.objects.get(pk=order_id)
             print(order,"orderil update aayo")
 
             order.booking_date = booking_date
             order.booking_time = booking_time
-            order.booking_ampm = booking_ampm           
-            order.save()
+            # combined_time = f"{booking_time} {booking_ampm}"
+
+            # order.booking_time = combined_time          
+            a=order.save()
+            print(a,"order il save aayoooooo")
             serializer = OrderSerializer(order)
             return Response({'success': True, 'order': serializer.data})
 
