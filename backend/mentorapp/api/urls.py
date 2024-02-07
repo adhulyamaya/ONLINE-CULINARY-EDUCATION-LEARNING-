@@ -14,5 +14,6 @@ urlpatterns = [
     path('mentor-availability/<int:mentor_id>/',MentorAvailabilityView.as_view(),name='classdetails'),
     # path('booking/',BookingStoringView.as_view(),name='booking'),
     path('storeOrder/',StoreOrderView.as_view(),name='storeOrder'),
+    path('booking/',UpdateBookingDetailsView.as_view(),name='booking'),
 
 ]

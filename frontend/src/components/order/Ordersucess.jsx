@@ -127,9 +127,13 @@ import axiosInstance from "../../axios/mentoraxios";
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
+import { useLocation } from "react-router-dom";
+
 
 const Ordersucess = () => { 
   const [joined, setJoined] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
+  const location = useLocation();
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedAmPm, setSelectedAmPm] = useState('AM');
@@ -139,6 +143,8 @@ const Ordersucess = () => {
   console.log(mentorId,".........")
   // const mentorId = Cookies.get('id');
   // console.log(mentorId,".........")
+  const orderId = location.state?.orderId || null;
+  console.log(orderId)
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -156,7 +162,7 @@ const Ordersucess = () => {
 
 
   const bookingData = {
-      // mentorId: mentorId,
+    order_id: orderId,
       selectedDate: selectedDate,
       selectedTime: `${selectedTime} ${selectedAmPm}`,
     };

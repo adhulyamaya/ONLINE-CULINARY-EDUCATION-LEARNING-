@@ -123,6 +123,7 @@ const Checkout = () => {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState("");
+  const [orderIdFromBackend, setOrderIdFromBackend] = useState(null);
   const [orderID, setOrderID] = useState(false);
   const { courseId } = useParams();
   const location = useLocation();
@@ -186,6 +187,9 @@ const Checkout = () => {
     })
     .then((response) => {
       console.log('Order details stored on the backend:', response.data);
+      const orderIdFromBackend =response.data.order.id
+      console.log('Order ID from backend:', orderIdFromBackend);
+
       
     })
     .catch((error) => {
@@ -193,15 +197,22 @@ const Checkout = () => {
       // Handle error, show a message, or redirect to an error page
     });
   };
-
   useEffect(() => {
     if (success) {
       alert("Payment successful!!");
-      console.log('Order successful. Your order id is--', orderID, CLIENT_ID);
-      navigate('/ordersuccess');
-      
+      console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
+      navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
     }
-  }, [success, orderID, CLIENT_ID, navigate]);
+  }, [success, orderIdFromBackend, CLIENT_ID, navigate]);
+  
+  // useEffect(() => {
+  //   if (success) {
+  //     alert("Payment successful!!");
+  //     console.log('Order successful. Your order id is--', orderID, CLIENT_ID);
+  //     navigate('/ordersuccess');
+      
+  //   }
+  // }, [success, orderID, CLIENT_ID, navigate]);
 
   return (                                                                                          
     <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>

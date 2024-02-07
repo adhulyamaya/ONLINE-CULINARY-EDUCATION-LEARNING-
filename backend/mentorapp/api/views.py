@@ -217,11 +217,40 @@ class StoreOrderView(APIView):
             )
             # order.save()
             print(order,"order create aayo")
+            serializer = OrderSerializer(order)
+            print(serializer.data,"for passing order id,for date and time booking")
+        
 
-            return Response({'success': True, 'message': 'Order details stored successfully'})
+            return Response({'success': True, 'message': 'Order details stored successfully', 'order': serializer.data})
         except Exception as e:
              return Response({'success': False, 'message': str(e)})
         
 
+# class StoretimedateView (APIView):
+#     def post(self, request):
+ # Import or create a serializer for the Order model
 
-        
+class UpdateBookingDetailsView(APIView):
+    def post(self, request):
+        try:
+            data = request.data
+            order_id = data.get('order_id')
+            booking_date = data.get('booking_date')
+            booking_time = data.get('booking_time')
+            booking_ampm = data.get('booking_ampm')
+
+            order = Order.objects.get(pk=order_id)
+
+            order.booking_date = booking_date
+            order.booking_time = booking_time
+            order.booking_ampm = booking_ampm           
+            order.save()
+            serializer = OrderSerializer(order)
+            return Response({'success': True, 'order': serializer.data})
+
+        except Order.DoesNotExist:
+            return Response({'success': False, 'message': 'Order not found'})
+
+        except Exception as e:
+            return Response({'success': False, 'message': str(e)})
+
