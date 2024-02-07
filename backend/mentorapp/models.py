@@ -46,3 +46,4 @@ class Order(models.Model):
     payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
     booking_date = models.DateField(null=True, blank=True)
     booking_time = models.TimeField(null=True, blank=True)
+    booking_ampm = models.CharField(max_length=2, null=True, blank=True) 

@@ -133,12 +133,6 @@ const Ordersucess = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedAmPm, setSelectedAmPm] = useState('AM');
-  const [availableTimes, setAvailableTimes] = useState([]);
-  
-  // const mentorId = useSelector((state) => state.mentorId);
-  // console.log(mentorId)
-  // const mentorIdFromCookies = Cookies.get('mentorId'); // Get mentorId from cookies
-  // console.log(mentorId,mentorIdFromCookies,"///////////////////////\\\\\\\\\\\\")
 
   const mentorIdCookie = Cookies.get('mentorId');
   const mentorId = mentorIdCookie ? JSON.parse(decodeURIComponent(mentorIdCookie))?.id : null;
@@ -161,22 +155,67 @@ const Ordersucess = () => {
   const handleBook = () => {
 
 
-    const bookingData = {
-      mentorId: mentorId,
+  const bookingData = {
+      // mentorId: mentorId,
       selectedDate: selectedDate,
       selectedTime: `${selectedTime} ${selectedAmPm}`,
     };
+    console.log(bookingData)
     axiosInstance.post('booking/', bookingData)
     .then((response) => {
       console.log(response.data);
       alert('Booking completed successfully');
       setJoined(true); 
      })
-
-
-   
-    // alert('Booking completed successfully');
   };
+      return (
+        <div>
+          <div className="App">
+            <p>Payment successfully completed</p>
+            <h1>BOOK YOUR TIME</h1>
+            <form>
+              <label>
+                Date:
+                <input type="date" value={selectedDate} onChange={handleDateChange} />
+              </label>
+              <br />
+              <label>
+                Time:
+                <input type="time" value={selectedTime} onChange={handleTimeChange} />
+                <select value={selectedAmPm} onChange={handleAmPmChange}>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </label>
+              <button type="button" onClick={handleBook}>Book</button>
+            </form>
+
+
+            {/* {!joined && (
+              <button onClick={() => setJoined(true)}>
+                Join Room
+              </button>
+            )}
+
+            {joined && <VideoRoom />} */}
+          </div>
+          
+        </div>
+      );
+}
+
+export default Ordersucess;
+
+
+// const [availableTimes, setAvailableTimes] = useState([]);
+  
+// const mentorId = useSelector((state) => state.mentorId);
+// console.log(mentorId)
+// const mentorIdFromCookies = Cookies.get('mentorId'); // Get mentorId from cookies
+// console.log(mentorId,mentorIdFromCookies,"///////////////////////\\\\\\\\\\\\")
+
+
+
 
   // useEffect(() => {
   //   if (mentorId) {
@@ -191,41 +230,9 @@ const Ordersucess = () => {
   //   }
   // }, [mentorId]);
 
-  return (
-    <div>
-      <div className="App">
-        <p>Payment successfully completed</p>
-        <h1>BOOK YOUR TIME</h1>
 
-        <form>
-          <label>
-            Date:
-            <input type="date" value={selectedDate} onChange={handleDateChange} />
-          </label>
-          <br />
-          <label>
-            Time:
-            <input type="time" value={selectedTime} onChange={handleTimeChange} />
-            <select value={`${selectedTime} ${selectedAmPm}`} onChange={handleAmPmChange}>
-              {availableTimes.map((timeSlot) => (
-                <option key={timeSlot.id} value={`${timeSlot.startTime} ${timeSlot.endTime}`}>
-                  {`${timeSlot.startTime} - ${timeSlot.endTime}`}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button type="button" onClick={handleBook}>Book</button>
-        </form>
 
-        {/* {!joined && (
-          <button onClick={() => setJoined(true)}>
-            Join Room
-          </button>
-        )}
-
-        {joined && <VideoRoom />} */}
-      </div>
-      {/* <div>
+{/* <div>
         <h2>Mentor Availability</h2>
         {availableTimes.length === 0 ? (
           <p>No availability information found for this mentor.</p>
@@ -239,8 +246,16 @@ const Ordersucess = () => {
           </ul>
         )}
       </div> */}
-    </div>
-  );
-}
 
-export default Ordersucess;
+
+
+
+
+
+{/* <select value={`${selectedTime} ${selectedAmPm}`} onChange={handleAmPmChange}>
+              {availableTimes.map((timeSlot) => (
+                <option key={timeSlot.id} value={`${timeSlot.startTime} ${timeSlot.endTime}`}>
+                  {`${timeSlot.startTime} - ${timeSlot.endTime}`}
+                </option>
+              ))}
+            </select> */}
