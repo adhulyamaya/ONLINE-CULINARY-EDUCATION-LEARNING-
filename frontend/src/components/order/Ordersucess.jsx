@@ -130,21 +130,21 @@ import Cookies from 'js-cookie';
 import { useLocation } from "react-router-dom";
 
 
-const Ordersucess = ({orderIdFromBackend}) => { 
+const Ordersucess = () => { 
   const [joined, setJoined] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
   const location = useLocation();
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedAmPm, setSelectedAmPm] = useState('AM');
+  const { state } = useLocation(); // Access state
+  const orderId = location.state?.orderId || null;
+  console.log(orderId,"order id .........")
+
 
   const mentorIdCookie = Cookies.get('mentorId');
   const mentorId = mentorIdCookie ? JSON.parse(decodeURIComponent(mentorIdCookie))?.id : null;
-  console.log(mentorId,".........")
-  // const mentorId = Cookies.get('id');
-  // console.log(mentorId,".........")
-  const orderId = location.state?.orderId || orderIdFromBackend;
-  console.log(orderIdFromBackend,".........")
+  console.log(mentorId,"......mentor id...")
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -160,11 +160,18 @@ const Ordersucess = ({orderIdFromBackend}) => {
   
   const handleBook = () => {
 
+    const formattedTime = new Date(`${selectedTime} ${selectedAmPm}`).toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    });
+
 
   const bookingData = {
-    order_id: orderId,
+      orderId:orderId,
       selectedDate: selectedDate,
-      selectedTime: `${selectedTime} ${selectedAmPm}`,
+      selectedTime: formattedTime,
     };
     console.log(bookingData)
     axiosInstance.post('booking/', bookingData)
@@ -177,6 +184,7 @@ const Ordersucess = ({orderIdFromBackend}) => {
       return (
         <div>
           <div className="App">
+          <h1>Order ID: {orderId}</h1>
             <p>Payment successfully completed</p>
             <h1>BOOK YOUR TIME</h1>
             <form>

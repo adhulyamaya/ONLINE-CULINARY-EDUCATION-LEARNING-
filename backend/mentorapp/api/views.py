@@ -234,12 +234,16 @@ class UpdateBookingDetailsView(APIView):
     def post(self, request):
         try:
             data = request.data
-            order_id = data.get('order_id')
-            booking_date = data.get('booking_date')
-            booking_time = data.get('booking_time')
+            print(data,"enthokkeeee")
+            order_id = data.get('orderId')
+            print (order_id,"...")
+            booking_date = data.get('selectedDate')
+            print(booking_date,"booking_date")
+            booking_time = data.get('selectedTime')
             booking_ampm = data.get('booking_ampm')
 
             order = Order.objects.get(pk=order_id)
+            print(order,"orderil update aayo")
 
             order.booking_date = booking_date
             order.booking_time = booking_time

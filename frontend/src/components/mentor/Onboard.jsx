@@ -22,6 +22,7 @@ const Onboard = () => {
   const dispatch = useDispatch();
   const mentoronboard = useSelector((state) => state.mentoronboard);
   const location = useLocation();
+  // navigate('../mentoronboard',{ state: { mentorId } });
   const mentorId = location.state?.mentorId || null;
 
   const mentorSubmit = () => {

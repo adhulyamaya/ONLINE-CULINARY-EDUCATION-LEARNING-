@@ -123,7 +123,7 @@ const Checkout = () => {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState("");
-  const [orderIdFromBackend, setOrderIdFromBackend] = useState(null);
+   const [orderIdFromBackend, setOrderIdFromBackend] = useState(null);
   const [orderID, setOrderID] = useState(false);
   const { courseId } = useParams();
   const location = useLocation();
@@ -170,13 +170,13 @@ const Checkout = () => {
     const userId = userDetails.id;
     console.log(userId)
 
-    const datas ={
-      orderID: orderID,
-      clientID: CLIENT_ID,
-      userDetails: userDetails,
-      courseDetails: courseInfo,
-    }
-    console.log(datas)
+    // const datas ={
+    //   orderID: orderID,
+    //   clientID: CLIENT_ID,
+    //   userDetails: userDetails,
+    //   courseDetails: courseInfo,
+    // }
+    // console.log(datas)
 
     
     axiosInstance.post('storeOrder/', {
@@ -189,19 +189,26 @@ const Checkout = () => {
       console.log('Order details stored on the backend:', response.data);
       const orderIdFromBackend =response.data.order.id
       console.log('Order ID from backend:', orderIdFromBackend);
+      // setOrderIdFromBackend(orderIdFromBackend);
+      console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
+    navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
 
       
     })
     .catch((error) => {
       console.error('Error storing order details on the backend:', error);
-      // Handle error, show a message, or redirect to an error page
     });
   };
+
+
   useEffect(() => {
     if (success) {
       alert("Payment successful!!");
+      const orderId = navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
       console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
-      navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
+      console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
+      console.log('orderIdFromBackend:', orderIdFromBackend);
+      // navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
     }
   }, [success, orderIdFromBackend, CLIENT_ID, navigate]);
   
