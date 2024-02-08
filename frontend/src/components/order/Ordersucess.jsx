@@ -1,5 +1,6 @@
 import { VideoRoom } from '../videoclass/VideoRoom';
 import VideoPlayer from '../videoclass/VideoPlayer';
+
 import Hero from '../home/hero/Hero';
 import Back from '../common/back/Back';
 import axiosInstance from "../../axios/mentoraxios";
@@ -16,6 +17,7 @@ const Ordersucess = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedAmPm, setSelectedAmPm] = useState('AM');
+  const [loading, setLoading] = useState(false);
   const { state } = useLocation(); // Access state
   const orderId = location.state?.orderId || null;
   console.log(orderId,"order id .........")
@@ -37,26 +39,51 @@ const Ordersucess = () => {
     setSelectedAmPm(event.target.value);
   };
   
-  const handleBook = () => {
+  // const handleBook = () => {
 
 
-  const bookingData = {
-    orderId:orderId,
+  // const bookingData = {
+  //   orderId:orderId,
     
-      selectedDate: selectedDate,
-      selectedTime: selectedTime,
-      // booking_ampm: selectedAmPm,
-    };
-    console.log(bookingData)
-    axiosInstance.post('booking/', bookingData)
-    .then((response) => {
-      console.log(response.data);
-      alert('Booking completed successfully');
-      setJoined(true); 
-     })
+  //     selectedDate: selectedDate,
+  //     selectedTime: selectedTime,
+  //     // booking_ampm: selectedAmPm,
+  //   };
+  //   console.log(bookingData)
+  //   axiosInstance.post('booking/', bookingData)
+  //   .then((response) => {
+  //     console.log(response.data);
+  //     alert('Booking completed successfully');
+  //     setJoined(true); 
+  //    })
+
+
+
+
+     const handleBook = () => {
+      setLoading(true); // Set loading state to true
+      const bookingData = {
+        orderId: orderId,
+        selectedDate: selectedDate,
+        selectedTime: selectedTime,
+      };
+      console.log(bookingData)
+      axiosInstance.post('booking/', bookingData)
+        .then((response) => {
+          console.log(response.data);
+          alert('Booking completed successfully');
+          setJoined(true);
+        })
+        .catch((error) => {
+          console.error('Error booking:', error);
+        })
+        .finally(() => {
+          setLoading(false); 
+        });
   };
       return (
         <div>
+          <Back/>
           <div className="App">
           <h1>Order ID: {orderId}</h1>
             <p>Payment successfully completed</p>
@@ -75,17 +102,20 @@ const Ordersucess = () => {
                   <option value="PM">PM</option>
                 </select>
               </label>
-              <button type="button" onClick={handleBook}>Book</button>
+              <button type="button" onClick={handleBook} disabled={loading}>
+                {loading ? 'Checking Availability...' : 'Book'}
+              </button>
             </form>
 
 
-            {/* {!joined && (
+            {!joined && (
               <button onClick={() => setJoined(true)}>
                 Join Room
               </button>
             )}
 
-            {joined && <VideoRoom />} */}
+
+            {joined && <VideoRoom />}
           </div>
           
         </div>

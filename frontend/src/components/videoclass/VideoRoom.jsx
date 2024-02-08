@@ -1,81 +1,88 @@
-// // import React from 'react'
 
-// // const VideoRoom = () => {
-// //   return (
-// //     <div>
-      
-// //     </div>
-// //   )
-// // }
-
-// // export default VideoRoom 
+import React, { useEffect, useState } from 'react';
+import AgoraRTC from 'agora-rtc-sdk-ng';
+import VideoPlayer from './VideoPlayer';
 
 
-// import React, { useEffect, useState } from 'react';
-// import AgoraRTC from 'agora-rtc-sdk-ng';
-// import VideoPlayer from './VideoPlayer';
+const APP_ID = '929e4070a372496daa6f4a2fac288801';
+const TOKEN =
+  '007eJxTYOD4lR/XYvJl10HZqwkJgubXmkL4pz/atv/pjf9phr/za18pMFgaWaaaGJgbJBqbG5lYmqUkJpqlmSQapSUmG1lYWBgYquQfSW0IZGTYzZ3KwAiFID4TQ0YmAwMAgGMfwg==';
+const CHANNEL = 'hi';
 
+const client = AgoraRTC.createClient({
+  mode: 'rtc',
+  codec: 'vp8',
+});
 
-// const APP_ID = '5faa9deb11234ddd9306a59723f24086';
-// const TOKEN =
-//   '007eJxTYLjwJfqHzzvH/nrNnJAe0QfnVqy3qpr549fOfznLf3q25aUqMJimJSZapqQmGRoaGZukpKRYGhuYJZpamhsZpxmZGFiY3X25IrUhkJGhvtyRlZEBAkF8doZgb2d/f+9gBgYA1IMjfg==';
-// const CHANNEL = 'SKCOOKS';
+// ... (imports and constant declarations)
 
-// const client = AgoraRTC.createClient({
-//   mode: 'rtc',
-//   codec: 'vp8',
-// });
+export const VideoRoom = () => {
+  const [users, setUsers] = useState([]);
+  const [localTracks, setLocalTracks] = useState([]);
 
-// // ... (imports and constant declarations)
+  useEffect(() => {
+    // const init = async () => {
+    //   try {
+    //     await client.join(APP_ID, CHANNEL, TOKEN || null, null);
 
-// export const VideoRoom = () => {
-//   const [users, setUsers] = useState([]);
-//   const [localTracks, setLocalTracks] = useState([]);
+    //     const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
+    //     const uid = await client.getLocalUid();
 
-//   useEffect(() => {
-//     const init = async () => {
-//       try {
-//         await client.join(APP_ID, CHANNEL, TOKEN || null, null);
+    //     setLocalTracks([audioTrack, videoTrack]);
+    //     setUsers((previousUsers) => [...previousUsers, { uid, videoTrack, audioTrack }]);
 
-//         const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
-//         const uid = await client.getLocalUid();
+    //     client.publish([audioTrack, videoTrack]);
+    //   } catch (error) {
+    //     console.error("Error joining the channel:", error);
+    //     // Handle the error appropriately
+    //   }
+    // };
 
-//         setLocalTracks([audioTrack, videoTrack]);
-//         setUsers((previousUsers) => [...previousUsers, { uid, videoTrack, audioTrack }]);
+    const init = async () => {
+      try {
+        await client.join(APP_ID, CHANNEL, TOKEN || null, null);
+    
+        const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
+    
+        setLocalTracks([audioTrack, videoTrack]);
+        
+        const localUid = client.uid; // Use client.uid to get the local UID
+        setUsers((previousUsers) => [...previousUsers, { uid: localUid, videoTrack, audioTrack }]);
+    
+        client.publish([audioTrack, videoTrack]);
+      } catch (error) {
+        console.error("Error joining the channel:", error);
+        // Handle the error appropriately
+      }
+    };
+    
 
-//         client.publish([audioTrack, videoTrack]);
-//       } catch (error) {
-//         console.error("Error joining the channel:", error);
-//         // Handle the error appropriately
-//       }
-//     };
+    init();
 
-//     init();
+    return () => {
+      if (localTracks.length > 0) {
+        for (let localTrack of localTracks) {
+          localTrack.stop();
+          localTrack.close();
+        }
 
-//     return () => {
-//       if (localTracks.length > 0) {
-//         for (let localTrack of localTracks) {
-//           localTrack.stop();
-//           localTrack.close();
-//         }
+        client.unpublish(localTracks).then(() => {
+          client.leave();
+        }).catch((error) => {
+          console.error("Error during unpublish or leave:", error);
+          // Handle the error appropriately
+        });
+      }
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-//         client.unpublish(localTracks).then(() => {
-//           client.leave();
-//         }).catch((error) => {
-//           console.error("Error during unpublish or leave:", error);
-//           // Handle the error appropriately
-//         });
-//       }
-//     };
-//   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-//   return (
-//     <div style={{ display: 'flex', justifyContent: 'center' }}>
-//       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)' }}>
-//         {users.map((user) => (
-//           <VideoPlayer key={user.uid} user={user} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)' }}>
+        {users.map((user) => (
+          <VideoPlayer key={user.uid} user={user} />
+        ))}
+      </div>
+    </div>
+  );
+};
