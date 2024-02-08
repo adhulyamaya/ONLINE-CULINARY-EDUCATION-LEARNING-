@@ -264,23 +264,23 @@ class UpdateBookingDetailsView(APIView):
 
 
 
-# mentor/views.py
+# # mentor/views.py
 
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
-from django.shortcuts import render
-from django.http import JsonResponse
+# from channels.layers import get_channel_layer
+# from asgiref.sync import async_to_sync
+# from django.shortcuts import render
+# from django.http import JsonResponse
 
-def trigger_notification(request):
-    # Your booking completion logic here...
+# def trigger_notification(request):
+#     # Your booking completion logic here...
 
-    # Trigger WebSocket notification
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-        'notifications_group', {
-            'type': 'send_notification',
-            'message': 'New booking details here',
-        }
-    )
+#     # Trigger WebSocket notification
+#     channel_layer = get_channel_layer()
+#     async_to_sync(channel_layer.group_send)(
+#         'notifications_group', {
+#             'type': 'send_notification',
+#             'message': 'New booking details here',
+#         }
+#     )
 
-    return JsonResponse({'status': 'success'})
+#     return JsonResponse({'status': 'success'})

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "myapp",
     "adminapp",
     "mentorapp",
+    "notification",
     "rest_framework",
     "corsheaders",
     "django.contrib.sites",

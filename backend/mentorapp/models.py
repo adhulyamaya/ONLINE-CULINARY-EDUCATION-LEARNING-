@@ -1,5 +1,11 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 from myapp.models import UserProfile
+from notification.models import Notification
+
+
+
+
 class MentorProfile(models.Model):
     name = models.CharField(max_length=255,blank=False,default="")
     fullname=models.CharField(max_length=255,blank=False,default="")
@@ -15,6 +21,7 @@ class MentorProfile(models.Model):
     is_approved = models.BooleanField(default=False)
     availability_start_time = models.TimeField(null=True, blank=True)
     availability_end_time = models.TimeField(null=True, blank=True)
+    notifications = GenericRelation(Notification)
     def __str__(self):
         return self.name
 

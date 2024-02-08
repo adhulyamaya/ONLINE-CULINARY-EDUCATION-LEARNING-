@@ -30,34 +30,22 @@ const Navbar = () => {
     cursor: "pointer",
   };
 
-
-
-
   
-  useEffect(() => {
-    // Connect to the WebSocket server
-    const socket = io("ws://your-django-server/ws/notifications/");
+  // useEffect(() => {
+  //   // Connect to the WebSocket server
+  //   const socket = io("ws://your-django-server/ws/notifications/");
 
-    // Listen for incoming notifications
-    socket.on("send_notification", (data) => {
-      // Update UI with the received notification data
-      console.log("Booking notification received:", data.message);
-    });
+  //   // Listen for incoming notifications
+  //   socket.on("send_notification", (data) => {
+  //     // Update UI with the received notification data
+  //     console.log("Booking notification received:", data.message);
+  //   });
 
-    // Cleanup on component unmount
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-
-
-
-
-
-
-
-
+  //   // Cleanup on component unmount
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
 
   return (
