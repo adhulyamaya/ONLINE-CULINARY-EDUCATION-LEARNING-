@@ -199,7 +199,13 @@ class SearchView(APIView):
 
 
 class PurchasedCourseListing(APIView):
-    def post(self,request):
+    def get(self,request):
+        orderobj=Order.objects.all()
+        print(orderobj)
+        if orderobj:
+            serializer=OrderSerializer(orderobj,many=True)
+            return Response({'message':'passed','userdata':serializer.data}) 
+
         return Response({"message":"failed"})
           
     

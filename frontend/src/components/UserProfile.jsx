@@ -72,7 +72,7 @@ const UserProfile = () => {
           <h3>{udata.username}</h3>
           <p>Email: {udata.email}</p>
           <p>User ID: {udata.id}</p>
-          <p><Link to="/">MY COURSES</Link></p>
+          <p><Link to="/mycourses">MY COURSES</Link></p>
         </div>
         </div>        
         <br />

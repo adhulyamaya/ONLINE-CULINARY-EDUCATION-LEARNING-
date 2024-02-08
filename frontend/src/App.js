@@ -26,6 +26,7 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import SideBar from "./components/admin/SideBar";
 import Navbar from "./components/admin/Navbar";
 import PurchasedCourses from "./components/mentor/PurchasedCourses";
+import MyCourses from "./components/Mycourses";
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
@@ -80,6 +81,7 @@ function App() {
             <Route  path="/contact" element={<Contact />} />
             <Route path="/checkout/:courseId" element={<Chekout />} />
             <Route path="/ordersuccess" element={<Ordersucess/>}/>
+            <Route path="/mycourses" element={<MyCourses/>}/>
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
  */}
