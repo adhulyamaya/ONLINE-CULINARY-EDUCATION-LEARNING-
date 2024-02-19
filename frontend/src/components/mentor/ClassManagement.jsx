@@ -49,18 +49,20 @@ function ClassManagement() {
       <div style={{ flex: 1, padding: "20px", margin: 0 }}>
       <MentorHeaders />
       <div className='container'>
-        <h1>CLASSES</h1>
-        <Link to="/addclass" className='btn btn-success my-3'>Create+</Link>
+      <div style={{ flex: 1, padding: "20px", margin: 0 }}>
+    
+    <Link to="/addclass"  style={{ backgroundColor: 'green' }} className='btn btn-success'>Create+</Link>
+  
         <table className='table'>
           <thead>
             <tr>
-              <th>Course name</th>
-              <th>Syllabus</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Enable/Disable</th>
-              <th>EDIT</th>
-              <th>DELETE</th>
+              <th style={{ paddingRight: '30px' }}>Course name</th>
+              <th style={{ paddingRight: '30px' }}>Syllabus</th>
+              <th style={{ paddingRight: '20px' }}>Description</th>
+              <th style={{ paddingRight: '20px' }}>Price</th>
+              <th style={{ paddingRight: '20px' }}>Enable/Disable</th>
+              <th style={{ paddingRight: '20px' }}>EDIT</th>
+              <th style={{ paddingRight: '20px' }}>DELETE</th>
             </tr>
           </thead>
           <tbody>
@@ -89,6 +91,7 @@ function ClassManagement() {
       </div>
       </div>
 
+    </div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const logoutSubmit = () => {
-    Cookies.remove("userDetails");
+    Cookies.remove("mentorDetails");
     Cookies.remove("accessToken");
     navigate("../mentorlogin");
   };
@@ -29,24 +29,6 @@ const Navbar = () => {
     borderRadius: "3px",
     cursor: "pointer",
   };
-
-  
-  // useEffect(() => {
-  //   // Connect to the WebSocket server
-  //   const socket = io("ws://your-django-server/ws/notifications/");
-
-  //   // Listen for incoming notifications
-  //   socket.on("send_notification", (data) => {
-  //     // Update UI with the received notification data
-  //     console.log("Booking notification received:", data.message);
-  //   });
-
-  //   // Cleanup on component unmount
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
-
 
   return (
     <nav style={headerStyle}>

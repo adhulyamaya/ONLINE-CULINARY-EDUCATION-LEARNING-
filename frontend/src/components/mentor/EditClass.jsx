@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { setClassname, setDescription, setPrice, setSyllabus } from '../../feautures/mentorSlice/addClassSlice';
 import axiosInstance from '../../axios/mentoraxios';
 import { useParams } from 'react-router-dom';
+import MentorHeader from "./MentorHeader";
+import MentorSidebar from "./MentorSidebar";
 const EditClass=()=> {
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -82,9 +84,17 @@ const EditClass=()=> {
 
 
   return (
-    <div className='d-flex w-100 vh-100 justify-content-center align-items-center'>
+    <div style={{ display: "flex" }}>
+    <MentorSidebar/>
+      <div style={{ flex: 1, padding: "20px", margin: 0 }}>
+      <MentorHeader />
+
         <div className='w-50 border bg-secondary text-white p-5'>
-        <h1>EDIT NEW USER</h1>
+        <div style={{ flex: 1, padding: "20px", margin: 0 }}>
+        <h3>EDIT USER DETAILS </h3>
+        <br />
+        <br />
+       
         <form>
             <div>
                 <label htmlFor="classname">Classname:</label>
@@ -110,6 +120,9 @@ const EditClass=()=> {
         <button className='btn btn-info' onClick={editClassSubmit}>Submit</button>
         </div>
     </div>
+    </div>
+    </div>
+    
   )
 }
 
