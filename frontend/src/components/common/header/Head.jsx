@@ -34,11 +34,14 @@ const Head = () => {
       <section className="head">
         <div className="container flexSB">
           <div className="logo">
-            <h1 style={{ color: "darkorange" }}>
+            {/* <h1 style={{ color: "darkorange" }}>
               S <span style={{ color: "red" }}>K &nbsp;</span>
               <span style={{ color: "white" }}>Cooks</span>
-            </h1>
-            <span style={{ color: "white" }}>
+            </h1> */}
+            {/* <h1>E-COOKS</h1> */}
+            <h1 style={{color: 'white'}}>E-COOKS</h1>
+
+            <span style={{ color: "gray" }}>
               ONLINE CULINARY EDUCATION & LEARNING
             </span>
           </div>

@@ -27,6 +27,9 @@ import SideBar from "./components/admin/SideBar";
 import Navbar from "./components/admin/Navbar";
 import PurchasedCourses from "./components/mentor/PurchasedCourses";
 import MyCourses from "./components/Mycourses";
+import ProtectedRouteUsers from "./ProtectedRoute/ProtectedRouteUsers";
+
+
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
@@ -58,43 +61,30 @@ function App() {
       <div className="App">
         <Suspense>
           <Routes>
-            {/* user routes */}
+              {/* user routes */}
             <Route path="/login" element={<Userlogin />} />
             <Route path="/signup" element={<Usersignup />} />
-            <Route
-              path="/"
-              element={
-                <LoaderWrapper>
-                  <Home />
-                </LoaderWrapper>
-              }
-            />
-
+            <Route path="/" element={ <LoaderWrapper><Home /></LoaderWrapper>}/>
             <Route path="/user-profile" element={<ProtectedRoute path="/user-profile" element={UserProfile} />} />
-            {/* <Route path="/user-profile" element={<ProtectedRoute component={UserProfile} />} /> */}
-            {/* <Route path="/user-profile" element={<UserProfile />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/courses" element={<CourseHome />} />
             <Route  path="/team" element={<Team />} />
             <Route  path="/pricing" element={<Pricing />} />
-            <Route  path="/journal" element={<Blog />} />
             <Route  path="/contact" element={<Contact />} />
             <Route path="/checkout/:courseId" element={<Chekout />} />
             <Route path="/ordersuccess" element={<Ordersucess/>}/>
-            <Route path="/mycourses" element={<MyCourses/>}/>
+            <Route path="/mycourses" element={<MyCourses/>}/> 
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
- */}
+            */}
 
-
-            {/* admin routes */}
-            
+            {/* admin routes */}            
             <Route path="/adminlogin" element={<Adminlogin />} />
             <Route path="/admin-home" element={<AdminHome />} />
+            {/* <ProtectedRouteUsers path="/admin-home" userType="admin" element={<AdminHome />} /> */}
             <Route path="/admin-profile"element={<AdminProfile />}/>
             <Route path="admin-home/mentors-manage" element={<Mentorsmanage />} />
             <Route path="admin-home/course-manage" element={<CourseManage />} />
-
             <Route path="/admin-profile" element={<AdminProfile />} />
             <Route path="/create" element={<Create />} />
             <Route path="/edit/:id" element={<EditUser />} />
@@ -102,15 +92,14 @@ function App() {
             <Route path="/mentorsmanage" element={<Mentorsmanage />} />
             <Route path="/coursemanage" element={<CourseManage />} />
             <Route path="/sidebar" element={<SideBar />} />
-            <Route path="/navbar" element={<Navbar />} />
-            
-            
+            <Route path="/navbar" element={<Navbar />} />            
 
             {/* {mentor routes} */}
             <Route path="/mentorsignup" element={<Mentorssignup />} />
             <Route path="/mentorlogin" element={<MentorLogin />} />
             <Route path="/mentoronboard" element={<Onboard />} />
             <Route path="/mentordashboard" element={<MentorDashboard />} />
+            {/* <ProtectedRouteUsers path="/mentordashboard" userType="mentor" element={<MentorDashboard />} /> */}
             <Route path="/classmanagement" element={<ClassManagement />} />
             <Route path ="/addclass" element={<AddClass/>}/>
             <Route path="/classmanagement/editclass/:id" element={<EditClass />} />
