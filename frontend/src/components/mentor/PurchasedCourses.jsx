@@ -5,6 +5,29 @@ import MentorSidebar from "./MentorSidebar";
 
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
+
+
+  const confirmationHandle = (id) => {
+    axiosInstance.post(`confirm-booking/${id}/`)
+    .then((res) => {
+      console.log("Booking confirmed successfully");
+      // Update the state locally to reflect the change
+      setUserdata(prevData => {
+        return prevData.map(item => {
+          if (item.id === id) {
+            // Update only the confirmed field or any other field you need
+            return { ...item, confirmed: true };
+          }
+          return item;
+        });
+      });
+    })
+
+      .catch((error) => {
+        console.error("Error confirming booking:", error);
+      });
+  };
+
   useEffect(() => {
     axiosInstance.get("entrolledstudents/")
       .then((res) => {
@@ -27,6 +50,7 @@ const PurchasedCourses = () => {
       <table className='table'>
           <thead>
             <tr>
+             <th style={{ paddingRight: '30px' }}>ORD ID</th>
               <th style={{ paddingRight: '30px' }}>student name</th>
               <th style={{ paddingRight: '30px' }}>classname</th>
               <th style={{ paddingRight: '20px' }}>paid amount</th>
@@ -39,16 +63,22 @@ const PurchasedCourses = () => {
           <tbody>
             {userdata.map((item) => (
               <tr key={item.id}>
-
+                <td>{item.id}</td>
                 <td>{item.student_username}</td>
                 <td>{item.class_name}</td>
                 <td>{item.payment_amount}</td>
                 <td>{item.booking_date}</td>
                 <td>{item.booking_time}</td>
-                <td>availablitity</td>
-                
-                
-                </tr>
+                    <td>
+                  {item.confirmed ? (
+                    <span style={{ color: 'green' }}>Confirmed</span>
+                  ) : (
+                    <button onClick={() => confirmationHandle(item.id)} className='btn btn-sm btn-primary' disabled={item.confirmed}>
+                      {item.confirmed ? 'Confirmed' : 'Confirm'}
+                    </button>
+                  )}
+                </td>       
+            </tr>
             ))}
           </tbody>
 

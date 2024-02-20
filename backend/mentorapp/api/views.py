@@ -268,3 +268,17 @@ class EntrolledStudentsView(APIView):
         serializer = OrderSerializer(order_obj, many=True)
         print(serializer.data)
         return Response({'success': True, 'userdata':serializer.data})
+    
+
+class ConfirmBookingView(APIView):
+    def post(self, request, order_id):
+        try:
+            order = Order.objects.get(pk=order_id)
+            order.payment_status = 'Confirmed'
+            order.save()
+
+            return Response({'success': True, 'message': 'Booking confirmed successfully'})
+        except Order.DoesNotExist:
+            return Response({'success': False, 'message': 'Order not found'})
+        except Exception as e:
+            return Response({'success': False, 'message': str(e)})

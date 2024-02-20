@@ -39,29 +39,8 @@ const Ordersucess = () => {
     setSelectedAmPm(event.target.value);
   };
   
-  // const handleBook = () => {
-
-
-  // const bookingData = {
-  //   orderId:orderId,
-    
-  //     selectedDate: selectedDate,
-  //     selectedTime: selectedTime,
-  //     // booking_ampm: selectedAmPm,
-  //   };
-  //   console.log(bookingData)
-  //   axiosInstance.post('booking/', bookingData)
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     alert('Booking completed successfully');
-  //     setJoined(true); 
-  //    })
-
-
-
-
      const handleBook = () => {
-      setLoading(true); // Set loading state to true
+      setLoading(true); 
       const bookingData = {
         orderId: orderId,
         selectedDate: selectedDate,

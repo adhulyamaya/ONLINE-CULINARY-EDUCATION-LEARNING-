@@ -16,6 +16,7 @@ urlpatterns = [
     path('storeOrder/',StoreOrderView.as_view(),name='storeOrder'),
     path('booking/',UpdateBookingDetailsView.as_view(),name='booking'),
     path('entrolledstudents/',EntrolledStudentsView.as_view(),name='entrolledstudents'),
+     path('confirm-booking/<int:order_id>/', ConfirmBookingView.as_view(), name='confirm-booking'),
    
 
 ]
