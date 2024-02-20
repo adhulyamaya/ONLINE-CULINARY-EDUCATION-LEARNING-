@@ -240,18 +240,17 @@ class UpdateBookingDetailsView(APIView):
             booking_date = data.get('selectedDate')
             print(booking_date,"booking_date")
             booking_time = data.get('selectedTime')
+            print(booking_time,"booking_time")
             # booking_ampm = data.get('booking_ampm')
 
             order = Order.objects.get(pk=order_id)
             print(order,"orderil update aayo")
-
             order.booking_date = booking_date
             order.booking_time = booking_time
             # combined_time = f"{booking_time} {booking_ampm}"
-
             # order.booking_time = combined_time          
-            a=order.save()
-            print(a,"order il save aayoooooo")
+            order.save()
+            print(order,"hiiiii")
             serializer = OrderSerializer(order)
             return Response({'success': True, 'order': serializer.data})
 
@@ -262,25 +261,10 @@ class UpdateBookingDetailsView(APIView):
             return Response({'success': False, 'message': str(e)})
 
 
-
-
-# # mentor/views.py
-
-# from channels.layers import get_channel_layer
-# from asgiref.sync import async_to_sync
-# from django.shortcuts import render
-# from django.http import JsonResponse
-
-# def trigger_notification(request):
-#     # Your booking completion logic here...
-
-#     # Trigger WebSocket notification
-#     channel_layer = get_channel_layer()
-#     async_to_sync(channel_layer.group_send)(
-#         'notifications_group', {
-#             'type': 'send_notification',
-#             'message': 'New booking details here',
-#         }
-#     )
-
-#     return JsonResponse({'status': 'success'})
+class EntrolledStudentsView(APIView):
+    def get(self,request):
+        order_obj=Order.objects.all()
+        print(order_obj,"hiiiiiiii")
+        serializer = OrderSerializer(order_obj, many=True)
+        print(serializer.data)
+        return Response({'success': True, 'userdata':serializer.data})

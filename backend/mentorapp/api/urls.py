@@ -15,5 +15,7 @@ urlpatterns = [
     # path('booking/',BookingStoringView.as_view(),name='booking'),
     path('storeOrder/',StoreOrderView.as_view(),name='storeOrder'),
     path('booking/',UpdateBookingDetailsView.as_view(),name='booking'),
+    path('entrolledstudents/',EntrolledStudentsView.as_view(),name='entrolledstudents'),
+   
 
 ]

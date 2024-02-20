@@ -41,7 +41,7 @@ class Class(models.Model):
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.class_name} - {self.mentor.name}"
+        return self.class_name
 
 class Order(models.Model):
     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

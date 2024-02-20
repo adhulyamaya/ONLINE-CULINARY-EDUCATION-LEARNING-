@@ -71,7 +71,7 @@ const Ordersucess = () => {
       axiosInstance.post('booking/', bookingData)
         .then((response) => {
           console.log(response.data);
-          alert('Booking completed successfully');
+        
           setJoined(true);
         })
         .catch((error) => {
@@ -108,14 +108,14 @@ const Ordersucess = () => {
             </form>
 
 
-            {!joined && (
+            {/* {!joined && (
               <button onClick={() => setJoined(true)}>
                 Join Room
               </button>
             )}
 
 
-            {joined && <VideoRoom />}
+            {joined && <VideoRoom />} */}
           </div>
           
         </div>

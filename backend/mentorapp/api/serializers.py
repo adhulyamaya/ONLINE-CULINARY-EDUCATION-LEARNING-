@@ -15,6 +15,8 @@ class ClassSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    student_username = serializers.CharField(source='student.username', read_only=True)
+    class_name=serializers.CharField(source='booked_class',read_only=True)
     class Meta:
         model = Order
         fields ='__all__'         
