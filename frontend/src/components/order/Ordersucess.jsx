@@ -8,6 +8,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { useLocation } from "react-router-dom";
+import io from 'socket.io-client';
+
 
 
 const Ordersucess = () => { 
@@ -21,6 +23,24 @@ const Ordersucess = () => {
   const { state } = useLocation(); // Access state
   const orderId = location.state?.orderId || null;
   console.log(orderId,"order id .........")
+
+
+  const [confirmed, setConfirmed] = useState(false);
+  useEffect(() => {
+    const socket = io('ws://localhost:8000/ws/booking/');
+    socket.on('bookingConfirmed', (confirmedOrderId) => {
+      if (confirmedOrderId === orderId) {
+        setConfirmed(true);
+      }
+    });
+    return () => {
+      socket.disconnect();
+    };
+
+       
+  }, [orderId]);
+
+
 
 
   const mentorIdCookie = Cookies.get('mentorId');
@@ -85,6 +105,11 @@ const Ordersucess = () => {
                 {loading ? 'Checking Availability...' : 'Book'}
               </button>
             </form>
+            {confirmed ? (
+                  <p>Your order has been confirmed!</p>
+                ) : (
+                  <p>Waiting for confirmation...</p>
+                )}
 
 
             {/* {!joined && (

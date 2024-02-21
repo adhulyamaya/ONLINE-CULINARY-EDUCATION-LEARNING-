@@ -2,9 +2,38 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios/mentoraxios';
 import MentorHeader from "./MentorHeader";
 import MentorSidebar from "./MentorSidebar";
+import io from 'socket.io-client';
 
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
+  const socket = io('ws://localhost:8000/ws/booking/');
+
+
+
+
+  useEffect(() => {
+    // Establish a socket connection
+    const socket = io('http://127.0.0.1:8000/'); // Replace with your server URL
+
+    // Listen for booking confirmation events
+    socket.on('bookingConfirmed', (confirmedOrderId) => {
+      // Update the state locally to reflect the change
+      setUserdata((prevData) => {
+        return prevData.map((item) => {
+          if (item.id === confirmedOrderId) {
+            // Update only the confirmed field or any other field you need
+            return { ...item, confirmed: true };
+          }
+          return item;
+        });
+      });
+    });
+
+    return () => {
+      // Clean up the socket connection on component unmount
+      socket.disconnect();
+    };
+  }, []); // Run this effect only once on component mount
 
 
   const confirmationHandle = (id) => {
@@ -12,16 +41,18 @@ const PurchasedCourses = () => {
     .then((res) => {
       console.log("Booking confirmed successfully");
       // Update the state locally to reflect the change
-      setUserdata(prevData => {
-        return prevData.map(item => {
-          if (item.id === id) {
-            // Update only the confirmed field or any other field you need
-            return { ...item, confirmed: true };
-          }
-          return item;
-        });
-      });
-    })
+    //   setUserdata(prevData => {
+    //     return prevData.map(item => {
+    //       if (item.id === id) {
+    //         // Update only the confirmed field or any other field you need
+    //         return { ...item, confirmed: true };
+    //       }
+    //       return item;
+    //     });
+    //   });
+    // }) const socket = io('http://your-server-url'); // Replace with your server URL
+        socket.emit('bookingConfirmed', id);
+      })
 
       .catch((error) => {
         console.error("Error confirming booking:", error);

@@ -1,7 +1,10 @@
-# routing.py in your notification app
-from django.urls import re_path
-from . import consumers
+# your_app/routing.py
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.urls import path
+from .consumers import NotificationConsumer
 
-websocket_urlpatterns = [
-    re_path(r'ws/notifications/$', consumers.NotificationConsumer.as_asgi()),
-]
+application = ProtocolTypeRouter({
+    "websocket": URLRouter([
+        path("ws/booking/", NotificationConsumer.as_asgi()),
+    ]),
+})

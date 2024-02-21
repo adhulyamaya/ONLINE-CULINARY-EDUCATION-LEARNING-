@@ -97,6 +97,7 @@ TEMPLATES = [
         },
     },
 ]
+ASGI_APPLICATION = 'backend.routing.application'
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
