@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,10 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
-# Application definition
 
 INSTALLED_APPS = [
+  
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,7 +51,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'channels',
+    'channels'
+    
 ]
 
 
@@ -64,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    
 ]
 
 CORS_ALLOWED_ORIGINS=[

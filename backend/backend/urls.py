@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include ('adminapp.api.urls')),
     path('mentor/',include('mentorapp.api.urls')),
     path('accounts/', include('allauth.urls')),
+    path('notifications/', include('notification.api.urls')),
 ]
