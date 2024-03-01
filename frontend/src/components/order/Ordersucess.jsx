@@ -41,8 +41,6 @@ const Ordersucess = () => {
   }, [orderId]);
 
 
-
-
   const mentorIdCookie = Cookies.get('mentorId');
   const mentorId = mentorIdCookie ? JSON.parse(decodeURIComponent(mentorIdCookie))?.id : null;
   console.log(mentorId,"......mentor id...")

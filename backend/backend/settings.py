@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-80$v-wjxo$ppt8p*ol$o06of(-=3nsq#wg!p%!i%l5*&vjhscf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,11 +66,11 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-# CORS_ALLOWED_ORIGINS=[
-#     "http://localhost:3000"
-# ]
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOWED_ORIGINS=[
+    "http://localhost:3000"
+]
 
+CORS_ALLOW_ALL_ORIGINS=True
 
 
 REST_FRAMEWORK = {
@@ -97,9 +98,17 @@ TEMPLATES = [
         },
     },
 ]
-ASGI_APPLICATION = 'backend.routing.application'
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+# WSGI_APPLICATION = 'backend.wsgi.application'
+ASGI_APPLICATION = 'backend.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {        
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {            
+              "hosts": [("127.0.0.1", 6379)],             
+        },
+    }}
+
 
 
 # Database
@@ -148,6 +157,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
