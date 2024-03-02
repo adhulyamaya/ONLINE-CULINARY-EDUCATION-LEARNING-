@@ -31,9 +31,11 @@ header ul li a {
   color: #fff;
   font-weight: 500;
   transition: 0.5s;
+  text-decoration: none;
 }
 header ul li a:hover {
   color: #1eb2a6;
+  text-decoration: underline;
 }
 .start {
   background-color: #1eb2a6;

@@ -9,7 +9,7 @@ const Navbar = () => {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px",
-    // paddingTop: "20px", // Adjust the value and unit as needed
+    // paddingTop: "20px", 
     background: "#f0e8f0",
    
   };
@@ -38,9 +38,7 @@ const Navbar = () => {
       <ul style={{ listStyle: "none", display: "flex", gap: "20px" }}>
       
         <li><button style={logoutButtonStyle} onClick={logoutSubmit}>LOGOUT</button></li>
-        {/* <li><a href="/about">About</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/contact">Contact</a></li> */}
+        
       </ul>
     </nav>
    

@@ -27,7 +27,9 @@ import SideBar from "./components/admin/SideBar";
 import Navbar from "./components/admin/Navbar";
 import PurchasedCourses from "./components/mentor/PurchasedCourses";
 import MyCourses from "./components/Mycourses";
+
 import ProtectedRouteUsers from "./ProtectedRoute/ProtectedRouteUsers";
+import UserNav from "./components/UserNav";
 
 
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
@@ -74,6 +76,7 @@ function App() {
             <Route path="/checkout/:courseId" element={<Chekout />} />
             <Route path="/ordersuccess" element={<Ordersucess/>}/>
             <Route path="/mycourses" element={<MyCourses/>}/> 
+            <Route path="/usernav" element={<UserNav/>}/> 
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
             */}

@@ -7,10 +7,6 @@ import io from 'socket.io-client';
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
   const socket = io('ws://localhost:8000/ws/notification/');
-
-
-
-
   useEffect(() => {
     // Establish a socket connection
     const socket = io('http://127.0.0.1:8000/');

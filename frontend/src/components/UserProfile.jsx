@@ -7,8 +7,7 @@ import { v4 } from "uuid";
 import axios from 'axios';
 import "./userprofile.css"
 import { Link } from 'react-router-dom';
-
-
+import UserNav from './UserNav';
 const UserProfile = () => {
     const [image,setImage]=useState('')
     const navigate = useNavigate()
@@ -53,7 +52,7 @@ const UserProfile = () => {
     } 
     return (
       <>
-      
+      <UserNav />
       <div className='nokk'>
       <br/>
       <br/>
