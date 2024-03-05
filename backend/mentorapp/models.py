@@ -54,6 +54,7 @@ class Order(models.Model):
     booking_date = models.DateField(null=True, blank=True)
     booking_time = models.TimeField(null=True, blank=True)
     booking_ampm = models.CharField(max_length=2, null=True, blank=True) 
+    confirmation_status = models.BooleanField(default=False)
 
 
     def __str__(self):

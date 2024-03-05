@@ -170,23 +170,6 @@ class MentorAvailabilityView(APIView):
         except MentorProfile.DoesNotExist:
             return Response({"error": "Mentor not found"})
 
-# class MentorAvailabilityView(APIView):
-#     def get(self, request):
-#         print(request.data )
-#         # Retrieve available time slots from the database or any other source
-#         # This is a placeholder, adjust it based on how you store mentor availability in your model
-#         try:
-#             mentor_id = request.data.get('mentor_id')
-#             print(mentor_id,"aara")
-#             mentor = MentorProfile.objects.get(id=mentor_id)
-#             available_times = self.get_available_times(mentor)
-#             print(available_times,"vanno")
-#             return Response(available_times)
-#         except MentorProfile.DoesNotExist:
-#             return Response({"error": "Mentor not found"})
-        
-# class BookingStoringView(APIView):
-#     def post(self,request):
 class StoreOrderView(APIView):
     def post(self, request):
         try:
@@ -215,7 +198,7 @@ class StoreOrderView(APIView):
                 booked_class=booked_class,
                 payment_amount=course_details.get('price'),
             )
-            # order.save()
+            
             print(order,"order create aayo")
             serializer = OrderSerializer(order)
             print(serializer.data,"for passing order id,for date and time booking")
@@ -225,10 +208,6 @@ class StoreOrderView(APIView):
         except Exception as e:
              return Response({'success': False, 'message': str(e)})
         
-
-# class StoretimedateView (APIView):
-#     def post(self, request):
- # Import or create a serializer for the Order model
 
 class UpdateBookingDetailsView(APIView):
     def post(self, request):
@@ -274,10 +253,12 @@ class ConfirmBookingView(APIView):
     def post(self, request, order_id):
         try:
             order = Order.objects.get(pk=order_id)
-            order.payment_status = 'Confirmed'
+            order.confirmation_status = True
             order.save()
+            print(order.confirmation_status,'is it saved as true now?')
+            serializer = OrderSerializer(order)
 
-            return Response({'success': True, 'message': 'Booking confirmed successfully'})
+            return Response({'success': True, 'order': serializer.data})
         except Order.DoesNotExist:
             return Response({'success': False, 'message': 'Order not found'})
         except Exception as e:

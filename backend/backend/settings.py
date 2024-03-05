@@ -113,6 +113,7 @@ CHANNEL_LAYERS = {
         },
     }}
 
+CHANNELS_WS_PROTOCOLS = ["websocket"]
 
 
 # Database
