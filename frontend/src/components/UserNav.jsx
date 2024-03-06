@@ -117,35 +117,50 @@
 // };
 
 // export default useNav;
+
+
+
 import React, { useEffect, useState } from 'react';
 
-const useNav = () => {
+const useNav = () => {  
   const [notification, setNotification] = useState('');
+  const [isWebSocketOpen, setIsWebSocketOpen] = useState(false);
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:3000/ws');
+    const socket = new WebSocket('ws://localhost:8000/ws/notification/');
 
     socket.addEventListener('open', (event) => {
-      console.log('WebSocket connected:', event);
+      console.log('WebSocket connectionnnn opened:', event);
+      setIsWebSocketOpen(true);
     });
-
     socket.addEventListener('message', (event) => {
-      console.log(event.data, 'eventooo');
+      console.log('WebSocket message received:', event.data);
       try {
         const data = JSON.parse(event.data);
-        console.log(data.content, 'is it getting that');
+        console.log(data.type);
+        console.log('Parsed data:', data);
 
-        if (data.type === 'notification' && data.content) {
-          setNotification(data.content);
+      if (data.type === 'notification') {
+        console.log(data.notification.content, 'Notification content');
+        setNotification(data.notification.content);
+        console.log(data.notification.content, 'msg varunnundoo');
         }
       } catch (error) {
-        console.error('Error parsing JSON:', error);
+        console.error('Error ppppppppppppppppparsing JSON:', error);
       }
     });
 
+    // socket.addEventListener('close', (event) => {
+    //   console.log('WebSocket closed:', event);
+    //   setIsWebSocketOpen(false);
+    // });
+
     return () => {
+    if (socket.readyState === WebSocket.OPEN) {
+      console.log('Component unmounted, closing WebSocket');
       socket.close();
-    };
+    }
+  };
   }, []);
 
   return (

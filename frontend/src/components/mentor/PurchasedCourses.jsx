@@ -65,10 +65,7 @@ const PurchasedCourses = () => {
       } catch (error) {
         console.error("Error parsing WebSocket message:", error);
       }
-    };
-    
-
-    
+    };    
   }, []);
 
   useEffect(() => {
