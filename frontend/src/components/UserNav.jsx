@@ -1,117 +1,61 @@
-// import React, { useState,useEffect} from 'react';
-
-// const UserNav = () => {
-
-//   const headerStyle = {
-//     display: "flex",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: "9px",
-//     paddingTop: "20px",
-//     background: "rgba(240, 232, 240, 0.5)",
-   
-//   };
-  
-//   const [notificationCount, setNotificationCount] = useState(0);
-//   useEffect(() => {
-//     const newSocket = new WebSocket('ws://localhost:8000/ws/notification/');
-
-//     newSocket.onopen = () => {
-//       console.log('WebSocket connection opened');
-//     };
-//     newSocket.onmessage = (event) => {
-//       const newNotification = JSON.parse(event.data);
-//       // Handle the received notification, update the UI, or show a notification
-//       console.log('Received notification:', newNotification);
-//       setNotificationCount((prevCount) => prevCount + 1);
-//     };
-
-//     newSocket.onclose = () => {
-//       console.log('WebSocket connection closed');
-//     };
-
-//     return () => {
-//       newSocket.close();
-//     };
-//   }, []);
-//   return (
-    // <nav style={headerStyle}>
-    //  <ul style={{ listStyle: "none", display: "flex", gap: "30px", marginLeft: "auto" }}>
-    //     <li style={{ marginRight: "10px" }}><a href="/">Home</a></li>
-    //     <li style={{ marginRight: "10px" }}><a href="/about">About</a></li>
-    //     <li style={{ marginRight: "10px" }}><a href="/contact">Contact</a></li>
-    //     <div className="notification-icon">
-        
-    //     <span className="icon">
-    //      <i className="fas fa-bell"></i>
-    //    </span>
-    //    <span className="notification-count">{notificationCount}</span>
-    //  </div> 
-    //   </ul>
-
-       
-    // </nav>
-//   )
-// }
-
-// export default UserNav
-
-
 // import React, { useEffect, useState } from 'react';
 
-// const useNav = () => {
+// const useNav = () => {  
 //   const [notification, setNotification] = useState('');
+//   const [isWebSocketOpen, setIsWebSocketOpen] = useState(false);
 
 //   useEffect(() => {
-//     const socket = new WebSocket('ws://localhost:3000/ws');
+//     const socket = new WebSocket('ws://localhost:8000/ws/notification/');
 
 //     socket.addEventListener('open', (event) => {
-//       console.log('WebSocket connected:', event);
+//       console.log('WebSocket connectionnnn opened:', event);
+//       setIsWebSocketOpen(true);
 //     });
-
 //     socket.addEventListener('message', (event) => {
-//       console.log(event.data,"eventooo")
+//       console.log('WebSocket message received:', event.data);
 //       try {
 //         const data = JSON.parse(event.data);
-//         console.log(data.content, 'is it getting that');
-  
-//         if (data.type === 'notification' && data.content) {
-//           setNotification(data.content);
+//         console.log(data.type);
+//         console.log('Parsed data:', data);
+
+//       if (data.type === 'notification') {
+//         console.log(data.notification.content, 'Notification content');
+//         setNotification(data.notification.content);
+//         console.log(data.notification.content, 'msg varunnundoo');
 //         }
 //       } catch (error) {
-//         console.error('Error parsing JSON:', error);
+//         console.error('Error ppppppppppppppppparsing JSON:', error);
 //       }
 //     });
+
 //     // socket.addEventListener('close', (event) => {
 //     //   console.log('WebSocket closed:', event);
+//     //   setIsWebSocketOpen(false);
 //     // });
 
-//     // return () => {
-    
-//     //   socket.close();
-//     // };
+//     return () => {
+//     if (socket.readyState === WebSocket.OPEN) {
+//       console.log('Component unmounted, closing WebSocket');
+//       socket.close();
+//     }
+//   };
 //   }, []);
 
 //   return (
 //     <div>
-//           <nav >
-//      <ul style={{ listStyle: "none", display: "flex", gap: "30px", marginLeft: "auto" }}>
-//         <li style={{ marginRight: "10px" }}><a href="/">Home</a></li>
-//         <li style={{ marginRight: "10px" }}><a href="/about">About</a></li>
-//         <li style={{ marginRight: "10px" }}><a href="/contact">Contact</a></li>
-//         <div className="notification-icon">
-        
-//         <span className="icon">
-//          <i className="fas fa-bell"></i>
-//        </span>
-//        <span className="notification-count"> <p>{notification}</p>  </span>
-//      </div> 
-//       </ul>
-
-       
-//     </nav>
-//       {/* Display notification in your UI */}
-     
+//       <nav>
+//         <ul style={{ listStyle: "none", display: "flex", gap: "30px", marginLeft: "auto" }}>
+//           <li style={{ marginRight: "10px" }}><a href="/">Home</a></li>
+//           <li style={{ marginRight: "10px" }}><a href="/about">About</a></li>
+//           <li style={{ marginRight: "10px" }}><a href="/contact">Contact</a></li>
+//           <div className="notification-icon">
+//             <span className="icon">
+//               <i className="fas fa-bell"></i>
+//             </span>
+//             <span className="notification-count"> <p>{notification}</p>  </span>
+//           </div>
+//         </ul>
+//       </nav>
 //     </div>
 //   );
 // };
@@ -120,66 +64,30 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React,{useState} from 'react'
+import './UseNav.css'
 
-const useNav = () => {  
-  const [notification, setNotification] = useState('');
-  const [isWebSocketOpen, setIsWebSocketOpen] = useState(false);
 
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8000/ws/notification/');
-
-    socket.addEventListener('open', (event) => {
-      console.log('WebSocket connectionnnn opened:', event);
-      setIsWebSocketOpen(true);
-    });
-    socket.addEventListener('message', (event) => {
-      console.log('WebSocket message received:', event.data);
-      try {
-        const data = JSON.parse(event.data);
-        console.log(data.type);
-        console.log('Parsed data:', data);
-
-      if (data.type === 'notification') {
-        console.log(data.notification.content, 'Notification content');
-        setNotification(data.notification.content);
-        console.log(data.notification.content, 'msg varunnundoo');
-        }
-      } catch (error) {
-        console.error('Error ppppppppppppppppparsing JSON:', error);
-      }
-    });
-
-    // socket.addEventListener('close', (event) => {
-    //   console.log('WebSocket closed:', event);
-    //   setIsWebSocketOpen(false);
-    // });
-
-    return () => {
-    if (socket.readyState === WebSocket.OPEN) {
-      console.log('Component unmounted, closing WebSocket');
-      socket.close();
-    }
+const UserNav = () => {
+  const [active, setActive]=useState('false')
+  const navToggle = () => {
+    setActive(!active);
   };
-  }, []);
-
   return (
-    <div>
-      <nav>
-        <ul style={{ listStyle: "none", display: "flex", gap: "30px", marginLeft: "auto" }}>
-          <li style={{ marginRight: "10px" }}><a href="/">Home</a></li>
-          <li style={{ marginRight: "10px" }}><a href="/about">About</a></li>
-          <li style={{ marginRight: "10px" }}><a href="/contact">Contact</a></li>
-          <div className="notification-icon">
-            <span className="icon">
-              <i className="fas fa-bell"></i>
-            </span>
-            <span className="notification-count"> <p>{notification}</p>  </span>
-          </div>
-        </ul>
-      </nav>
-    </div>
-  );
-};
+    <nav className='nav'>
+      <a href="" className='nav_brand'>E-COOKS</a>
+      <ul className='nav_item'>
+          <li ><a href="/">Home</a></li>
+          <li ><a href="/about">About</a></li>
+          <li ><a href="/contact">Contact</a></li>    
+      </ul>
+      <div onClick={navToggle} className='nav_toggler'>
+        <div className='line1'></div>
+        
+      </div>
+                          
+    </nav>
+  )
+}
 
-export default useNav;
+export default UserNav
