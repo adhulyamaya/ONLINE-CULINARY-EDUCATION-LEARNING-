@@ -162,7 +162,6 @@ const MyCourses = () => {
               <Typography paragraph hidden={!expanded}>
                 Paid Amount: {course.payment_amount}
               </Typography>
-
               <Typography paragraph hidden={!expanded}>
                 Confirmation Status: <span style={{ color: course.confirmation_status ? 'green' : 'red' }}>
                   {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}

@@ -1,171 +1,294 @@
-import React from "react";
-import {
-  changeFullname,
-  changeEmail,
-  changeBio,
-  changeExpertise,
-  changeExperience,
-  changeAge,
-  changeImage,
-  changeAddress,
-  changeCertificate,
-  changeAvailabilityStartTime,
-  changeAvailabilityEndTime
-} from "../../feautures/mentorSlice/mentorOnboardSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import axiosInstance from "../../axios/mentoraxios";
 
-const Onboard = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const mentoronboard = useSelector((state) => state.mentoronboard);
-  const location = useLocation();
-  // navigate('../mentoronboard',{ state: { mentorId } });
-  const mentorId = location.state?.mentorId || null;
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
 
-  const mentorSubmit = () => {
-    const datas = {
-      mentor_id: mentorId,
-      fullname: mentoronboard.value.fullname,
-      email: mentoronboard.value.email,
-      bio: mentoronboard.value.bio,
-      expertise: mentoronboard.value.expertise,
-      experience: mentoronboard.value.experience,
-      age: mentoronboard.value.age,
-      image: mentoronboard.value.image,
-      address: mentoronboard.value.address,
-      certificate: mentoronboard.value.certificate,
-      availability_start_time: mentoronboard.value.availability_start_time,
-      availability_end_time: mentoronboard.value.availability_end_time,
-    };
+// const MentorOnboardForm = ({ onSubmit }) => {
+//   const [formValues, setFormValues] = React.useState({
+//     fullname: '',
+//     email: '',
+//     bio: '',
+//     expertise: '',
+//     experience: '',
+//     age: '',
+//     address: '',
+//     certificate: '',
+//     availability_start_time: '',
+//     availability_end_time: '',
+//   });
 
-    axiosInstance.post("mentoronboard/", datas).then((res) => {
-      if (res.data.message === "success") {
-        navigate("../mentorlogin");
-      }
-    });
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormValues((prevValues) => ({
+//       ...prevValues,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     onSubmit(formValues);
+//   };
+
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         minHeight: '100vh',
+//         padding: '20px',
+//       }}
+//     >
+//       <Box
+//         component="form"
+//         sx={{
+//           display: 'flex',
+//           flexDirection: 'column',
+//           // alignItems: 'left',
+//           // width: '100%',
+//           maxWidth: '300px', // Adjust the maxWidth here
+//           '& .MuiTextField-root': { m: 1, width: '100%' },
+//           '& .MuiButton-root': { mt: 2, width: '100%' },
+//         }}
+//         noValidate
+//         autoComplete="off"
+//         onSubmit={handleSubmit}
+//       >
+//         <div>
+//           <TextField
+//             required
+//             id="fullname"
+//             name="fullname"
+//             label="Full Name"
+//             value={formValues.fullname}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             required
+//             id="email"
+//             name="email"
+//             label="Email"
+//             type="email"
+//             value={formValues.email}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="bio"
+//             name="bio"
+//             label="Bio"
+//             value={formValues.bio}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="expertise"
+//             name="expertise"
+//             label="Expertise"
+//             value={formValues.expertise}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="experience"
+//             name="experience"
+//             label="Experience"
+//             value={formValues.experience}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="age"
+//             name="age"
+//             label="Age"
+//             type="number"
+//             value={formValues.age}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="address"
+//             name="address"
+//             label="Address"
+//             value={formValues.address}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="certificate"
+//             name="certificate"
+//             label="Certificate"
+//             value={formValues.certificate}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="availability_start_time"
+//             name="availability_start_time"
+//             label="Availability Start Time"
+//             type="time"
+//             value={formValues.availability_start_time}
+//             onChange={handleChange}
+//           />
+//           <TextField
+//             id="availability_end_time"
+//             name="availability_end_time"
+//             label="Availability End Time"
+//             type="time"
+//             value={formValues.availability_end_time}
+//             onChange={handleChange}
+//           />
+//         </div>
+//         <Button variant="contained" type="submit">
+//           Mentor Sign Up
+//         </Button>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default MentorOnboardForm;
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+const MentorOnboardForm = ({ onSubmit }) => {
+  const [formValues, setFormValues] = React.useState({
+    fullname: '',
+    email: '',
+    bio: '',
+    expertise: '',
+    experience: '',
+    age: '',
+    address: '',
+    certificate: '',
+    availability_start_time: '',
+    availability_end_time: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formValues);
   };
 
   return (
-    <form className="mt-4 mb-4 m-4">
-      <div className="form-group mb-1">
-        <label htmlFor="fullname">Full Name</label>
-        <input
-          type="text"
-          className="form-control"
-          id="fullname"
-          placeholder="Full Name"
-          onChange={(e) => dispatch(changeFullname(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          className="form-control"
-          id="email"
-          placeholder="Email"
-          onChange={(e) => dispatch(changeEmail(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="bio">Bio</label>
-        <input
-          type="text"
-          className="form-control"
-          id="bio"
-          placeholder="Bio"
-          onChange={(e) => dispatch(changeBio(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="expertise">Expertise</label>
-        <input
-          type="text"
-          className="form-control"
-          id="expertise"
-          placeholder="Expertise"
-          onChange={(e) => dispatch(changeExpertise(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="experience">Experience</label>
-        <input
-          type="text"
-          className="form-control"
-          id="experience"
-          placeholder="Experience"
-          onChange={(e) => dispatch(changeExperience(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="age">Age</label>
-        <input
-          type="text"
-          className="form-control"
-          id="age"
-          placeholder="Age"
-          onChange={(e) => dispatch(changeAge(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label htmlFor="image">Profile Image</label>
-        <div className="input-group mb-3">
-          <div className="custom-file">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="inputGroupFile02"
-              onChange={(e) => dispatch(changeImage(e.target.files[0]))}
-            />
-          </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: '20px',
+        backgroundImage: `url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Box
+        component="form"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'left',
+          width: '100%',
+          maxWidth: '400px', 
+          '& .MuiTextField-root': { m: 1, width: '100%' },
+          '& .MuiButton-root': { mt: 2, width: '100%' },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <div>
+          <TextField
+            required
+            id="fullname"
+            name="fullname"
+            label="Full Name"
+            value={formValues.fullname}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          <TextField
+            id="bio"
+            name="bio"
+            label="Bio"
+            value={formValues.bio}
+            onChange={handleChange}
+          />
+          <TextField
+            id="expertise"
+            name="expertise"
+            label="Expertise"
+            value={formValues.expertise}
+            onChange={handleChange}
+          />
+          <TextField
+            id="experience"
+            name="experience"
+            label="Experience"
+            value={formValues.experience}
+            onChange={handleChange}
+          />
+          <TextField
+            id="age"
+            name="age"
+            label="Age"
+            type="number"
+            value={formValues.age}
+            onChange={handleChange}
+          />
+          <TextField
+            id="address"
+            name="address"
+            label="Address"
+            value={formValues.address}
+            onChange={handleChange}
+          />
+          <TextField
+            id="certificate"
+            name="certificate"
+            label="Certificate"
+            value={formValues.certificate}
+            onChange={handleChange}
+          />
+          <TextField
+            id="availability_start_time"
+            name="availability_start_time"
+            label="Availability Start Time"
+            type="time"
+            value={formValues.availability_start_time}
+            onChange={handleChange}
+          />
+          <TextField
+            id="availability_end_time"
+            name="availability_end_time"
+            label="Availability End Time"
+            type="time"
+            value={formValues.availability_end_time}
+            onChange={handleChange}
+          />
         </div>
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="address">Address</label>
-        <input
-          type="text"
-          className="form-control"
-          id="address"
-          placeholder="Address"
-          onChange={(e) => dispatch(changeAddress(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="certificate">Certificate</label>
-        <input
-          type="text"
-          className="form-control"
-          id="certificate"
-          placeholder="Certificate"
-          onChange={(e) => dispatch(changeCertificate(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="availability_start_time">Availability Start Time</label>
-        <input
-          type="time"
-          className="form-control"
-          id="availability_start_time"
-          onChange={(e) => dispatch(changeAvailabilityStartTime(e.target.value))}
-        />
-      </div>
-      <div className="form-group mb-1">
-        <label htmlFor="availability_end_time">Availability End Time</label>
-        <input
-          type="time"
-          className="form-control"
-          id="availability_end_time"
-          onChange={(e) => dispatch(changeAvailabilityEndTime(e.target.value))}
-        />
-      </div>
-      <button className="btn btn-primary" type="button" onClick={mentorSubmit}>
-        Mentor Sign Up
-      </button>
-    </form>
+        <Button variant="contained" type="submit">
+          Mentor Sign Up
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
-export default Onboard;
+export default MentorOnboardForm;
