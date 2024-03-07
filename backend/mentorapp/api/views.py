@@ -79,6 +79,8 @@ class CreateclassView(APIView):
         course_description = request.data.get('description')
         price = request.data.get('price')
         syllabus = request.data.get('syllabus')
+        thumbnail = request.data.get('imageUrl')
+        print(thumbnail,"")
 
         try:
             mentor = MentorProfile.objects.get(id=mentor_id)
@@ -90,10 +92,12 @@ class CreateclassView(APIView):
             class_name=class_name,
             course_description=course_description,
             price=price,
-            syllabus=syllabus
+            syllabus=syllabus,
+            thumbnail=thumbnail
         )
-
+        print(classobj,"class obj il thumbnail urlstore ayitundoo????????????????????")
         serialized = ClassSerializer(classobj)
+        print(serialized.data,".......llll....")
         return Response({"message": "success", "data": serialized.data})
     
 class ClassdetailsView(APIView):

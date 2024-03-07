@@ -9,25 +9,6 @@ from mentorapp.api.serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 # from allauth.socialaccount.models import SocialAccount
 
-
-# Create  here.
-
-
-# class LoginView(APIView):
-#     def post(self,request):
-#         username=request.data.get('username')
-#         password=request.data.get('password')
-
-#         userobj = UserProfile.objects.get(username=username,password=password)
-#         print(userobj,"?????????????////////")
-#         if userobj:
-#             refresh = RefreshToken.for_user(userobj)
-#             serialized = UserProfileSerializer(userobj)
-#             print(serialized.data,"{{{{{{serialized.data}}}}}}")
-#             return Response({"message":"success","userdata":serialized.data,"refresh":str(refresh),"access":str(refresh.access_token)})
-#         else:
-#             return Response({"message":"invalid credentials"})
-        
 class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -101,8 +82,6 @@ class SignupView(APIView):
     
 
 
-
-
 class CourseListing(APIView):
     def get(self,request):
      courseobj=Class.objects.all() 
@@ -111,10 +90,6 @@ class CourseListing(APIView):
         return Response({"message":"passedddddddddddddddddddddddddddd",'classdata':serializer.data})
 
 
-
-
-
-    
 
 class ImageuploadView(APIView):
     def post(self,request):
@@ -128,6 +103,7 @@ class ImageuploadView(APIView):
 
         serialized = UserProfileSerializer(userobj)
         return Response({"message":"image updated","details":serialized.data})
+    
     
 
 

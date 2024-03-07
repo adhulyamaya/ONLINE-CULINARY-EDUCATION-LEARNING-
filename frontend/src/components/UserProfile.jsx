@@ -24,6 +24,7 @@ const UserProfile = () => {
       console.log(e.target.files)
       setImage(e.target.files[0])
     }
+    
     const handleApi=()=>{
       const reference = ref(storage, `users/${image.name + v4()}`);
       uploadBytes(reference, image)
@@ -43,7 +44,7 @@ const UserProfile = () => {
         }).catch((error)=>{
           alert(error)
         })
-
+ 
         })                
       })
     }

@@ -35,7 +35,7 @@ class Class(models.Model):
     date = models.DateField(null=True, blank=True)
     start_datetime = models.DateTimeField(null=True, blank=True)
     end_datetime = models.DateTimeField(null=True, blank=True)
-    thumbnail = models.ImageField(max_length=500,default="")
+    thumbnail = models.CharField(max_length=500, default="")
     schedule = models.CharField(max_length=255,null=True, blank=True)   
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     enabled = models.BooleanField(default=True)

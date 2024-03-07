@@ -39,7 +39,9 @@ const MyCourses = () => {
            <p>Confirmation Status: {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}</p>
            <p>Student ID: {course.student}</p>
            <p>Booked Class: {course.booked_class.class_name }</p>
+           <p>Booked Clasaaaaaaaaaaas: {course.booked_class.thumbnail }</p>
            <p>Booked Class: {course.booked_class.mentor }</p>
+           <img src={course.booked_class.imageUrl} alt="Course Thumbnail" style={{ width: '200px', height: '150px' }} />
          </div>
         ))}
       </div>

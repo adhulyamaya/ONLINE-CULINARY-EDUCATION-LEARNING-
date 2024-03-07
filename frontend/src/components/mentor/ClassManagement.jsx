@@ -7,15 +7,12 @@ import MentorSidebar from "./MentorSidebar";
 function ClassManagement() {
   const navigate = useNavigate();
   const [userdata, setUserdata] = useState([]);
-
   const editHandle = (id) => {
     navigate(`editclass/${id}`);
   };
-
   const deleteHandle = (id) => {
     navigate(`deleteclass/${id}`);
   };
-
   const toggleEnableDisable = (id, currentStatus, item) => {
     console.log(id,"ddddddddd")
     axiosInstance.patch(`classdetails/${id}/`, { enabled: !currentStatus })
@@ -59,6 +56,7 @@ function ClassManagement() {
               <th style={{ paddingRight: '30px' }}>Course name</th>
               <th style={{ paddingRight: '30px' }}>Syllabus</th>
               <th style={{ paddingRight: '20px' }}>Description</th>
+              <th style={{ paddingRight: '20px' }}>image</th>
               <th style={{ paddingRight: '20px' }}>Price</th>
               <th style={{ paddingRight: '20px' }}>Enable/Disable</th>
               <th style={{ paddingRight: '20px' }}>EDIT</th>
@@ -71,6 +69,7 @@ function ClassManagement() {
                 <td>{item.class_name}</td>
                 <td>{item.syllabus}</td>
                 <td>{item.course_description}</td>
+                <td>{item.thumbnail}</td>
                 <td>{item.price}</td>
                 <td>
                   <button
