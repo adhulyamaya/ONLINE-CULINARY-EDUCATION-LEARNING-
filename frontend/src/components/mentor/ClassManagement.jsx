@@ -69,7 +69,9 @@ function ClassManagement() {
                 <td>{item.class_name}</td>
                 <td>{item.syllabus}</td>
                 <td>{item.course_description}</td>
-                <td>{item.thumbnail}</td>
+                <td>
+                  <img src={item.thumbnail} alt={item.class_name} style={{ width: '100px', height: 'auto' }} />
+                </td>
                 <td>{item.price}</td>
                 <td>
                   <button

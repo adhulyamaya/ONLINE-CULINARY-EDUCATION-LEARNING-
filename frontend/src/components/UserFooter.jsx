@@ -5,7 +5,7 @@ import './UserFooter.css';
 const UserFooter = () => {
   return (
     <>
-      <section className="contact-short">
+      {/* <section className="contact-short">
         <div className="grid grid-two-column">
           <div>
             <h3>Ready to get started?</h3>
@@ -14,7 +14,7 @@ const UserFooter = () => {
           <div>
           </div>
         </div>
-      </section>
+      </section> */}
       
       {/* footer section */}
       <footer>
