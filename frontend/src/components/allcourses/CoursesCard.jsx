@@ -116,7 +116,7 @@ const CoursesCard = () => {
                 <div className='content flex'>
                   <div className='left'>
                     <div className='img'>
-                      {/* <img src={val.cover} alt='' /> */}
+                      <img src={val.thumbnail} alt='' />
                     </div>
                   </div>
                   <div className='text'>
@@ -130,19 +130,11 @@ const CoursesCard = () => {
                       <label htmlFor=''>(5.0)</label>
                     </div>
                     <div className='details'>
-                      {/* {val.courTeacher.map((details) => (
-                        <>
-                          <div className='box'>
-                            <div className='dimg'>
-                              <img src={details.dcover} alt='' />
-                            </div>
-                            <div className='para'> 
-                              <h4>{details.name}</h4>
-                            </div>
-                          </div>
-                          <span>{details.totalTime}</span>
-                        </>
-                      ))} */}
+                      {/* Additional Details */}
+                      <p>Price: {val.price}</p>
+                      <p>Description: {val.course_description}</p>
+                      <p>syllabus: {val.syllabus}</p>
+                      {/* You can add more details here */}
                     </div>
                   </div>
                 </div>
@@ -152,7 +144,14 @@ const CoursesCard = () => {
                   </h3>
                 </div>
 
-                <Link to={`/checkout/${val.id}`} state={{ courseInfo: { class_name: val.class_name, price: val.price } }}>
+                {/* Pass more details to the Link */}
+                <Link to={`/checkout/${val.id}`} state={{ courseInfo: { 
+                  class_name: val.class_name, 
+                  price: val.price,
+                  course_description: val.course_description, 
+                  thumbnail: val.thumbnail,
+                  syllabus: val.syllabus
+                } }}>
                   <button className='outline-btn'>ENROLL NOW!</button>
                 </Link>
               </div>
@@ -165,6 +164,7 @@ const CoursesCard = () => {
 }
 
 export default CoursesCard;
+
 
 
  

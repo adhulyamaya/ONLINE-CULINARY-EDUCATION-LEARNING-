@@ -95,7 +95,8 @@ function App() {
             <Route path="/mentorsmanage" element={<Mentorsmanage />} />
             <Route path="/coursemanage" element={<CourseManage />} />
             <Route path="/sidebar" element={<SideBar />} />
-            <Route path="/navbar" element={<Navbar />} />            
+            <Route path="/navbar" element={<Navbar />} />   
+                     
 
             {/* {mentor routes} */}
             <Route path="/mentorsignup" element={<Mentorssignup />} />

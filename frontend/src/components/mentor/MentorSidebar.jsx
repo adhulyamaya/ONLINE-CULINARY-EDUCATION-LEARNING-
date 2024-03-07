@@ -30,7 +30,7 @@ const MentorSidebar = () => {
 
 const sidebarStyle = {
   width: "210px",
-  height: "698px",
+  height: "1000px",
   backgroundColor: "#a07fa0",
   color: "#fff",
   padding: "20px",

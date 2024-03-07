@@ -6,7 +6,6 @@ const RouterOutlet = () => {
     <Outlet/>
   );
 }
-
 export default RouterOutlet
 
 

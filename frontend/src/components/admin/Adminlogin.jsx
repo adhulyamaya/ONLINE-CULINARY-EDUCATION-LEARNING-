@@ -10,10 +10,8 @@ const Adminlogin = () => {
     const [adminPassword, setPassword] = useState("");
     const [error,setError]=useState(null);
     const navigate=useNavigate();
-    
     const handleSignup = (e) => {
-        e.preventDefault();
-        
+        e.preventDefault(); 
         console.log("Signup details:", { adminUsername,  adminPassword });
         const datas = {
           username: adminUsername,
@@ -36,8 +34,7 @@ const Adminlogin = () => {
             console.error(error);
             setError('Invalid credentials. Please check your username and password.');
           });
-      };
-      
+      };   
     return (
         <>
             <div className="bgImg">
