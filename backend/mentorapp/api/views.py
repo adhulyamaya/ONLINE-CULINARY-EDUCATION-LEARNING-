@@ -193,9 +193,10 @@ class StoreOrderView(APIView):
             user_id = user_details.get('id')  
             print(user_id,"...................................kk")
             course_id = course_details.get('class_id')
-            print(course_id,";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;kk")
+            print(course_id,";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;kk")  
             class_name = course_details.get('class_name')
             booked_class = Class.objects.get(class_name=class_name)
+            print(booked_class,"booked claasil enthokke")
 
             order = Order.objects.create(
                 student_id=user_id,
@@ -211,7 +212,7 @@ class StoreOrderView(APIView):
             return Response({'success': True, 'message': 'Order details stored successfully', 'order': serializer.data})
         except Exception as e:
              return Response({'success': False, 'message': str(e)})
-        
+         
 
 class UpdateBookingDetailsView(APIView):
     def post(self, request):
