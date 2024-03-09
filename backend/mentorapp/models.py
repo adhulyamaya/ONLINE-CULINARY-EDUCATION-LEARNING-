@@ -21,7 +21,7 @@ class MentorProfile(models.Model):
     is_approved = models.BooleanField(default=False)
     availability_start_time = models.TimeField(null=True, blank=True)
     availability_end_time = models.TimeField(null=True, blank=True)
-    notifications = GenericRelation(Notification)
+   
     def __str__(self):
         return self.name
 
