@@ -51,7 +51,32 @@
 //     </>
 //   );
 // };
-
+          // <CardContent>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Booking Date: {course.booking_date}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Booking Time: {course.booking_time}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Order Time: {course.order_time}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Payment Amount: {course.payment_amount}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Confirmation Status: {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Student ID: {course.student}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Booked Class: {course.booked_class.class_name}
+          //     </Typography>
+          //     <Typography variant="body2" color="text.secondary">
+          //       Mentor: {course.booked_class.mentor}
+          //     </Typography>
+          //   </CardContent> 
 // const rectangularBoxStyle = {
 //   width: '500px',
 //   height: '500px',
@@ -94,8 +119,6 @@ const MyCourses = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
-
   return (
     <>
       <UserNav />                                                                 
@@ -113,33 +136,9 @@ const MyCourses = () => {
               height="194"
               image={course.booked_class.thumbnail}
               alt="Booked Class Thumbnail"
+              style={{ objectFit: 'contain', height: '200px' }}
             />
-            {/* <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                Booking Date: {course.booking_date}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Booking Time: {course.booking_time}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Order Time: {course.order_time}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Payment Amount: {course.payment_amount}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Confirmation Status: {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Student ID: {course.student}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Booked Class: {course.booked_class.class_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Mentor: {course.booked_class.mentor}
-              </Typography>
-            </CardContent> */}
+
             <CardActions disableSpacing>
               <IconButton
                 onClick={handleExpandClick}
@@ -222,12 +221,3 @@ export default MyCourses;
 
 
 
-// const rectangularBoxStyle = {
-//   width: '500px',          // Set the width of the box
-//   height: '500px',         // Set the height of the box
-//   border: '2px solid #000', // Set border with a color
-//   padding: '20px',         // Set padding inside the box
-//   margin: '20px',          // Set margin around the box
-// };
-
-// export default MyCourses;

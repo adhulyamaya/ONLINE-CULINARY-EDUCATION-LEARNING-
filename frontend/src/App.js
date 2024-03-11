@@ -30,6 +30,8 @@ import MyCourses from "./components/Mycourses";
 
 import ProtectedRouteUsers from "./ProtectedRoute/ProtectedRouteUsers";
 import UserNav from "./components/UserNav";
+import Chat from "./chat/ChatRoom";
+import ChatRoomMentor from "./chat/ChatRoomMentor";
 
 
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
@@ -45,6 +47,7 @@ const Create = lazy(() => import("./components/admin/Create"));
 const EditUser = lazy(() => import("./components/admin/EditUser"));
 const DeleteUser = lazy(() => import("./components/admin/DeleteUser"));
 const CourseHome= lazy (() => import("./components/allcourses/CourseHome") );
+
 
 const LoaderWrapper = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -77,6 +80,8 @@ function App() {
             <Route path="/ordersuccess" element={<Ordersucess/>}/>
             <Route path="/mycourses" element={<MyCourses/>}/> 
             <Route path="/usernav" element={<UserNav/>}/> 
+            <Route path="/chatroom" element={<Chat />}/> 
+
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
             */}
@@ -109,6 +114,7 @@ function App() {
             <Route path="/classmanagement/editclass/:id" element={<EditClass />} />
             <Route path="/classmanagement/deleteclass/:id" element={<DeleteClass />} />
             <Route path="/purchased courses" element={<PurchasedCourses />} />
+            <Route path="/chatroommentor" element={<ChatRoomMentor />} />
 
           </Routes>
         </Suspense>
