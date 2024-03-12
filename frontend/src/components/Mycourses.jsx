@@ -1,93 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import axiosInstance from '../axios/axios';
-// import UserNav from './UserNav';
-// import UserFooter from './UserFooter';
-
-// const MyCourses = () => {
-//   const [mycourse, setMycourses] = useState([]);
-
-//   useEffect(() => {
-//     axiosInstance.get('purchased-courses/')
-//       .then((res) => {
-//         console.log(res.data);
-//         setMycourses(res.data.userdata);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }, []);
-
-//   return (
-//     <>
-//     <UserNav />                                                                 
-
-
-//     <div>
-      
-//       <div >
-
-//         {mycourse.map((course, index) => (
-//            <div key={index}>
-//            {/* <p>ID: {course.id}</p> */}
-//            {/* <p>Student Username: {course.student_username}</p> */}
-//           <p>Booked Class Thumbnail: <img src={course.booked_class.thumbnail} alt="Booked Class Thumbnail" /></p> 
-//            <p>Class Name: {course.class_name.class_name}</p>
-//            <p>Order Date: {course.order_date}</p>
-//            <p>Booking Date: {course.booking_date}</p>
-//            <p>Booking Time: {course.booking_time}</p>
-//            <p>Order Time: {course.order_time}</p>
-//            <p>Payment Amount: {course.payment_amount}</p>
-//            <p>Confirmation Status: {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}</p>
-//            <p>Student ID: {course.student}</p>
-//            <p>Booked Class: {course.booked_class.class_name }</p>
-//            {/* <p>Booked Class Thumbnail: <img src={course.booked_class.thumbnail} alt="Booked Class Thumbnail" /></p>  */}
-//            <p>Booked Clalss: {course.booked_class.mentor }</p> 
-//          </div>
-//         ))}
-//       </div>
-      
-//     </div>
-//     <UserFooter/>
-//     </>
-//   );
-// };
-          // <CardContent>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Booking Date: {course.booking_date}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Booking Time: {course.booking_time}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Order Time: {course.order_time}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Payment Amount: {course.payment_amount}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Confirmation Status: {course.confirmation_status ? 'Confirmed' : 'Not Confirmed'}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Student ID: {course.student}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Booked Class: {course.booked_class.class_name}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       Mentor: {course.booked_class.mentor}
-          //     </Typography>
-          //   </CardContent> 
-// const rectangularBoxStyle = {
-//   width: '500px',
-//   height: '500px',
-//   border: '2px solid #000',
-//   padding: '20px',
-//   margin: '20px',
-// };
-
-// export default MyCourses;
-
-
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios/axios';
 import UserNav from './UserNav';
@@ -100,10 +10,14 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChatIcon from '@mui/icons-material/Chat';
+import VideoCallIcon from '@mui/icons-material/VideoCall'; 
+import { useNavigate } from 'react-router-dom';
 
 const MyCourses = () => {
   const [myCourses, setMyCourses] = useState([]);
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance.get('purchased-courses/')
@@ -119,17 +33,30 @@ const MyCourses = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleChatWithMentor = (mentorId) => {
+    // Handle chat with mentor functionality here
+    console.log('Chat with mentor ID:', mentorId);
+    navigate('/chatroom')
+  };
+
+  const handleVideoCallWithMentor = (mentorId) => {
+    // Handle video call with mentor functionality here
+    console.log('Video call with mentor ID:', mentorId);
+    // You can implement video call logic here
+  };
+
   return (
     <>
       <UserNav />                                                                 
 
       <div style={{ margin: '20px', display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
         {myCourses.map((course, index) => (
-          <Card key={index} style={{ maxWidth: 345 }}>
+          <Card key={index} style={{ maxWidth: 345, height: '100%' }}>
             <CardHeader
               title={course.class_name.class_name}
-               subheader={`course: ${course.class_name}`}
-               subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold', color: 'black', fontSize: '1.2rem' }}
+              subheader={`Course: ${course.class_name}`}
+              subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold', color: 'black', fontSize: '1.2rem' }}
             />
             <CardMedia
               component="img"
@@ -147,6 +74,20 @@ const MyCourses = () => {
               >
                 <ExpandMoreIcon />
               </IconButton>
+              <IconButton
+                onClick={() => handleChatWithMentor(course.booked_class.mentor)}
+                aria-label="chat with mentor"
+              >
+                <ChatIcon />
+              </IconButton>
+
+              <IconButton
+                onClick={() => handleVideoCallWithMentor(course.booked_class.mentor)}
+                aria-label="video call with mentor"
+              >
+                <VideoCallIcon />
+              </IconButton>
+
             </CardActions>
             <CardContent>
               <Typography paragraph hidden={!expanded}>
@@ -188,13 +129,6 @@ const MyCourses = () => {
 };
 
 export default MyCourses;
-
-
-
-
-
-
-
 
 
 
