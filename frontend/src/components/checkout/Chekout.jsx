@@ -9,6 +9,7 @@ import axiosInstance from "../../axios/mentoraxios";
 import Back from "../common/back/Back";
 import UserNav from "../UserNav";
 import UserFooter from "../UserFooter";
+import Cookies from "js-cookie";
 
 const Checkout = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,7 @@ const Checkout = () => {
   };
 
   const sendDetailsToBackend = (orderID, courseInfo) => {
-    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(Cookies.get("userDetails"));
     const userId = userDetails.id;
     console.log(userId)
     

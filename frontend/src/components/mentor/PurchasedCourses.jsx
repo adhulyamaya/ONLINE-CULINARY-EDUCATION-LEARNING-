@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios/mentoraxios';
 import MentorHeader from "./MentorHeader";
 import MentorSidebar from "./MentorSidebar";
+import { IconButton } from '@mui/material';
+import ChatIcon from '@mui/icons-material/Chat';
+import { useNavigate } from 'react-router-dom';
 
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false); // Track WebSocket connection status
+  const navigate = useNavigate();
 
   const confirmationHandle = (id) => {
     axiosInstance.post(`confirm-booking/${id}/`)
@@ -33,6 +37,14 @@ const PurchasedCourses = () => {
       .catch((error) => {
         console.error("Error confirming booking:", error);
       });
+  };
+
+  
+  const initiateChat = (studentId) => {
+    // Handle initiating chat with the student
+    console.log("Initiate chat with student:", studentId);
+    // Redirect to chat page or open a modal for chat with student
+    navigate('/chatroommentor')
   };
 
   useEffect(() => {
@@ -129,6 +141,11 @@ const PurchasedCourses = () => {
                           </button>
                         )}
                       </td>
+                      <td>
+                        <IconButton onClick={() => initiateChat(item.student_id)} aria-label="chat">
+                          <ChatIcon />
+                        </IconButton>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -143,14 +160,25 @@ const PurchasedCourses = () => {
 
 export default PurchasedCourses;
 
+
+
+
 // import React, { useEffect, useState } from 'react';
 // import axiosInstance from '../../axios/mentoraxios';
 // import MentorHeader from "./MentorHeader";
 // import MentorSidebar from "./MentorSidebar";
+// import { IconButton } from '@mui/material';
+// import ChatIcon from '@mui/icons-material/Chat';
+// import { useNavigate } from 'react-router-dom';
 
 // const PurchasedCourses = () => {
 //   const [userdata, setUserdata] = useState([]);
 //   const [socket, setSocket] = useState(null);
+//   const [isConnected, setIsConnected] = useState(false); // Track WebSocket connection status
+//   const [chatSocket, setChatSocket] = useState(null);
+//   const [isChatConnected, setIsChatConnected] = useState(false);
+//   const [chatHistory, setChatHistory] = useState([]); // Store chat messages
+//   const navigate = useNavigate();
 
 //   const confirmationHandle = (id) => {
 //     axiosInstance.post(`confirm-booking/${id}/`)
@@ -179,12 +207,26 @@ export default PurchasedCourses;
 //       });
 //   };
 
+//   const initiateChat = (studentId) => {
+//     // Ensure chat socket is connected, reconnect if needed
+//     if (!chatSocket || chatSocket.readyState !== WebSocket.OPEN) {
+//       console.warn("Chat socket not connected, attempting to reconnect");
+//       // Implement reconnection logic if needed
+//       // For now, let's handle the case where socket is not open
+//       return;
+//     }
+
+//     // Proceed with chat initiation (e.g., navigate to chat room)
+//     navigate('/chatroommentor', { state: { studentId } }); // Pass studentId to chat room
+//   };
+
 //   useEffect(() => {
 //     const newSocket = new WebSocket('ws://localhost:8000/ws/notification/');
 
 //     newSocket.onopen = () => {
-//       console.log('WebSocket connection opened');
+//       console.log('WebSocket connection opened for notification');
 //       setSocket(newSocket);
+//       setIsConnected(true); // Update connection status
 //     };
 
 //     newSocket.onmessage = (event) => {
@@ -192,11 +234,8 @@ export default PurchasedCourses;
 //         const newUserData = JSON.parse(event.data);
     
 //         if (Array.isArray(newUserData)) {
-//           // If newUserData is an array, concatenate it with the existing userdata
 //           setUserdata((prevUserData) => [...prevUserData, ...newUserData]);
 //         } else {
-//           // If newUserData is not an array, handle it accordingly (maybe update a single item)
-//           // For example, assuming there's an ID field in newUserData
 //           setUserdata((prevUserData) => {
 //             const existingItemIndex = prevUserData.findIndex(item => item.id === newUserData.id);
 //             if (existingItemIndex !== -1) {
@@ -220,7 +259,34 @@ export default PurchasedCourses;
 //       }
 //     };
 //   }, []);
-// ;
+
+//   useEffect(() => {
+//     const newChatSocket = new WebSocket('ws://localhost:8000/ws/chat/');
+
+//     newChatSocket.onopen = () => {
+//       console.log('Chat WebSocket connected');
+//       setChatSocket(newChatSocket);
+//       setIsChatConnected(true);
+//     };
+
+//     newChatSocket.onmessage = (event) => {
+//       try {
+//         const messageData = JSON.parse(event.data);
+//         // Update chat history state
+//         setChatHistory((prevHistory) => [...prevHistory, messageData]);
+//       } catch (error) {
+//         console.error("Error parsing chat message:", error);
+//       }
+//     };
+
+//     // Cleanup chat socket
+//     return () => {
+//       console.log('Cleaning up Chat WebSocket connection');
+//       if (newChatSocket && newChatSocket.readyState === WebSocket.OPEN) {
+//         newChatSocket.close();
+//       }
+//     };
+//   }, []);
 
 //   useEffect(() => {
 //     axiosInstance.get("entrolledstudents/")
@@ -232,6 +298,10 @@ export default PurchasedCourses;
 //         console.error("Error fetching data:", error);
 //       });
 //   }, []);
+
+//   if (!isConnected) {
+//     return <div>Loading...</div>; // Render a loading indicator until WebSocket is connected
+//   }
 
 //   return (
 //     <>
@@ -250,7 +320,7 @@ export default PurchasedCourses;
 //                     <th style={{ paddingRight: '20px' }}>paid amount</th>
 //                     <th style={{ paddingRight: '20px' }}>booked date</th>
 //                     <th style={{ paddingRight: '20px' }}>booked time</th>
-//                     <th style={{ paddingRight: '20px' }}>availabilty</th>
+//                     <th style={{ paddingRight: '20px' }}>availability</th>
 //                     <th style={{ paddingRight: '20px' }}></th>
 //                   </tr>
 //                 </thead>
@@ -272,6 +342,11 @@ export default PurchasedCourses;
 //                           </button>
 //                         )}
 //                       </td>
+//                       <td>
+//                         <IconButton onClick={() => initiateChat(item.student_id)} aria-label="chat">
+//                           <ChatIcon />
+//                         </IconButton>
+//                       </td>
 //                     </tr>
 //                   ))}
 //                 </tbody>
@@ -281,7 +356,7 @@ export default PurchasedCourses;
 //         </div>
 //       </div>
 //     </>
-//   )
-// }
+//   );
+// };
 
 // export default PurchasedCourses;

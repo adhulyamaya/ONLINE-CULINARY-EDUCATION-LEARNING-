@@ -8,6 +8,7 @@ import axios from 'axios';
 import "./userprofile.css"
 import { Link } from 'react-router-dom';
 import UserNav from './UserNav';
+import Cookies from 'js-cookie';
 const UserProfile = () => {
     const [image,setImage]=useState('')
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ const UserProfile = () => {
     const [updateStatus, setUpdateStatus] = useState('not-updated');
   
     useEffect(()=>{
-      const userobj = localStorage.getItem("userDetails")
+      const userobj = Cookies.get("userDetails")
       setUdata(JSON.parse(userobj))  
     },[])
     console.log(udata,"udataaaa");  

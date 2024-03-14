@@ -30,8 +30,11 @@ import MyCourses from "./components/Mycourses";
 
 import ProtectedRouteUsers from "./ProtectedRoute/ProtectedRouteUsers";
 import UserNav from "./components/UserNav";
-import Chat from "./chat/ChatRoom";
+// import Chat from "./chat/ChatRoom";
 import ChatRoomMentor from "./chat/ChatRoomMentor";
+import Chat from "./chat/ChatRoom";
+
+
 
 
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
@@ -81,6 +84,8 @@ function App() {
             <Route path="/mycourses" element={<MyCourses/>}/> 
             <Route path="/usernav" element={<UserNav/>}/> 
             <Route path="/chatroom" element={<Chat />}/> 
+            {/* <Route path="/chatroom/:mentorId" component={<Chat />} /> */}
+            {/* <Route path="/chatroom/:mentorId" component={<Chat/>} /> */}
 
             {/* <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>

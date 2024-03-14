@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit"
 const INITITALSTATE={
     name:"",
     password:"",
-    mentorId:null,  
+    mentorId: null,  
 }
 
 const mentorsignupSlice = createSlice(
@@ -22,10 +22,7 @@ const mentorsignupSlice = createSlice(
             setMentorId: (state, action) => {
                 state.value.mentorId = action.payload;
                 console.log('Mentor ID updated in Redux state:', action.payload);
-              },
-              
-            
-                            
+              },                            
         }        
     }
 )

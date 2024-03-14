@@ -22,7 +22,7 @@ const Userlogin = () => {
     }
   }, []);
   
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState(null); 
 
   const loginSubmit = () => {
     const datas = {
@@ -79,8 +79,8 @@ const Userlogin = () => {
                     refresh: res.data.refresh,
                   };
                   
-                  localStorage.setItem('userDetails', JSON.stringify(res.data.userdata));
-                  localStorage.setItem('accessToken', JSON.stringify(res.data.access));
+                  Cookies.set('userDetails', JSON.stringify(res.data.userdata));
+                  Cookies.set('accessToken', JSON.stringify(res.data.access));
                   if (res.data.message === 'success') {
                     navigate('../');
                   }
