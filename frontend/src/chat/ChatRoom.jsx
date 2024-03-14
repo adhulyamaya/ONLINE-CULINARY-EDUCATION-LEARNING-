@@ -63,7 +63,7 @@ const Chat = () => {
                 user: user,
                 message: message,
                 sender_type: 'user', 
-                // sender_id:sender_id,
+                sender_id:31,
                 receiver_type:'mentor',
                 receiver_id:mentorsignup.value.mentorId,
             };

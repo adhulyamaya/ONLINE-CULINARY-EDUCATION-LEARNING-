@@ -174,27 +174,6 @@ const MyCourses = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   // Get user's authentication token from wherever it's stored (localStorage, Redux state, etc.)
-  //   const authToken = localStorage.getItem('authToken'); // Example: Fetch auth token from localStorage
-
-  //   // Ensure authToken exists before making the request
-  //   if (authToken) {
-  //     axiosInstance.get('purchased-courses/', {
-  //       headers: {
-  //         Authorization: `Bearer ${authToken}`, // Include the auth token in the Authorization header
-  //       },
-  //     })
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         setMyCourses(res.data.userdata);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }
-  // }, []);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
