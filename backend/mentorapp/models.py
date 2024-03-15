@@ -23,7 +23,7 @@ class MentorProfile(models.Model):
     availability_end_time = models.TimeField(null=True, blank=True)
    
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.id}"
 
 
     
@@ -59,4 +59,5 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order ID: {self.pk}"
+    
     

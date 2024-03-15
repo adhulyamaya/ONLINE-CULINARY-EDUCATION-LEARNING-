@@ -16,6 +16,8 @@ const Chat = () => {
     const ws = useRef(null);
     const mentorsignup = useSelector((state) => state.mentorsignup);
     const mentorId = mentorsignup.mentorId
+
+    
     console.log(mentorId,"hi")
     console.log(mentorsignup,mentorsignup.value.mentorId,'hlp')
    
@@ -68,7 +70,7 @@ const Chat = () => {
                 receiver_id:mentorsignup.value.mentorId,
             };
             // Send message to WebSocket server
-            console.log('Sending message hiiiii:', messageData);
+            console.log('Sending message userside:', messageData);
             if (ws.current.readyState === WebSocket.OPEN) {
                 ws.current.send(JSON.stringify(messageData));
                 setMessage('');

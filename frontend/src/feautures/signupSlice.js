@@ -7,6 +7,7 @@ const INITITALSTATE={
     phone:"",
     image:"",
     password:"",  
+    studentId: null, 
 }
 const customersignupSlice = createSlice(
     {
@@ -27,16 +28,19 @@ const customersignupSlice = createSlice(
             changePhone:(state,action)=>{
                 state.value.phone=action.payload
             },
-            changeImage:(state,action)=>{
+            changeImage:(state,action)=>{ 
                 state.value.image=action.payload
             },
             changePassword:(state,action)=>{
                 state.value.password=action.payload
-            },        
+            },   
+            setStudentId: (state, action) => { 
+                state.value.studentId = action.payload;
+            },     
         }        
     }
 )
 
-export const {changeUsername,changeName,changeEmail,changePhone,changeImage,changePassword} = customersignupSlice.actions
+export const {changeUsername,changeName,changeEmail,changePhone,changeImage,changePassword,setStudentId} = customersignupSlice.actions
 export default customersignupSlice.reducer
 

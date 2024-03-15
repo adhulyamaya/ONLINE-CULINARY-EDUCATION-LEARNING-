@@ -29,10 +29,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         print('Received message:', text_data_json)
         message = text_data_json['message']
+        print('Riiii message:', message)
+
         sender_type = text_data_json['sender_type']
+        print('Riiiiage:', sender_type)
         sender_id = text_data_json['sender_id']
+        print('id:', sender_id)
         receiver_type = text_data_json['receiver_type']
+        print('receiver_type:', receiver_type)
         receiver_id = text_data_json['receiver_id']
+        print('receiver_id:', receiver_id)
 
         # Save message to database 
         await self.save_message_to_database(message, sender_type, sender_id, receiver_type, receiver_id)
